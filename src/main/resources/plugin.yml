@@ -1,0 +1,5 @@
+name: Compound
+description: An incredibly flexible library for spigot development
+version: 2
+main: ltd.matrixstudios.compound.CompoundPlugin
+author: Matrix Studios Software

@@ -1,0 +1,39 @@
+# IntelliJ
+.idea
+.iml
+.iws
+
+gradle.properties
+
+# Mac
+.DS_Store
+
+# Maven
+log
+target
+dependency-reduced-pom.xml
+
+# Java
+#.jar
+
+# JRebel
+rebel.xml
+
+# Keep libs
+#!lib.jar
+
+.gradle
+build
+!srcbuild
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+# Cache of project
+.gradletasknamecache
+
+# # Work around httpsyoutrack.jetbrains.comissueIDEA-116898
+# gradlewrappergradle-wrapper.properties
