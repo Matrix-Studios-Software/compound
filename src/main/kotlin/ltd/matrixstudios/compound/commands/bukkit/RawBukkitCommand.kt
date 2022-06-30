@@ -19,7 +19,7 @@ class RawBukkitCommand(val command: Command) : org.bukkit.command.Command(comman
             }
         }
 
-        if (compoundCommand.commandOption.permission != null && !compoundCommand.commandOption.requireOperator)
+        if (compoundCommand.commandOption.permission != null)
         {
             if (!sender.hasPermission(compoundCommand.commandOption.permission))
             {
