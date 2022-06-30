@@ -4,33 +4,33 @@ import org.bukkit.entity.Player
 
 class VisibilityHandler {
 
-    lateinit var startvisibility: (Player) -> Unit
-    lateinit var changevisibility: (Player) -> Unit
+    lateinit var enableVisibility: (Player) -> Unit
+    lateinit var changeVisibility: (Player) -> Unit
 
 
-    fun onChangeVisibility(predicate: (Player) -> Unit): VisibilityHandler
+    fun onDisableVisibility(predicate: (Player) -> Unit): VisibilityHandler
     {
         return this.apply {
-            changevisibility = predicate
+            changeVisibility = predicate
         }
     }
 
-    fun onStartVisibility(predicate: (Player) -> Unit): VisibilityHandler
+    fun onEnableVisibility(predicate: (Player) -> Unit): VisibilityHandler
     {
         return this.apply {
-            startvisibility = predicate
+            enableVisibility = predicate
         }
     }
 
 
-    fun processChangeVisibility(player: Player)
+    fun processDisableVisibility(player: Player)
     {
-        changevisibility.invoke(player)
+        changeVisibility.invoke(player)
     }
 
-    fun processStartVisibility(player: Player)
+    fun processEnableVisibility(player: Player)
     {
-        startvisibility.invoke(player)
+        enableVisibility.invoke(player)
     }
 
 }
