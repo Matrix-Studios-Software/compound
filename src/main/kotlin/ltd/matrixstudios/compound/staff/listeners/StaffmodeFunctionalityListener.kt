@@ -77,7 +77,7 @@ class StaffmodeFunctionalityListener : Listener {
 
         if (player.itemInHand.isSimilar(StaffItems.FREEZE))
         {
-            if (e.rightClicked is Player)
+            if (e.rightClicked != null && e.rightClicked is Player)
             {
                 val clicked = e.rightClicked
 
