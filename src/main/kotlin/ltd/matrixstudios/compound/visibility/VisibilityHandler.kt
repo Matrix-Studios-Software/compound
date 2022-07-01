@@ -2,35 +2,13 @@ package ltd.matrixstudios.compound.visibility
 
 import org.bukkit.entity.Player
 
-class VisibilityHandler {
-
-    lateinit var enableVisibility: (Player) -> Unit
-    lateinit var changeVisibility: (Player) -> Unit
+abstract class VisibilityHandler {
 
 
-    fun onDisableVisibility(predicate: (Player) -> Unit): VisibilityHandler
-    {
-        return this.apply {
-            changeVisibility = predicate
-        }
-    }
+    abstract fun onDisableVisbility(player: Player)
 
-    fun onEnableVisibility(predicate: (Player) -> Unit): VisibilityHandler
-    {
-        return this.apply {
-            enableVisibility = predicate
-        }
-    }
+    abstract fun onEnableVisibility(player: Player)
 
 
-    fun processDisableVisibility(player: Player)
-    {
-        changeVisibility.invoke(player)
-    }
-
-    fun processEnableVisibility(player: Player)
-    {
-        enableVisibility.invoke(player)
-    }
 
 }
