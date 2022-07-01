@@ -5,9 +5,12 @@ import ltd.matrixstudios.compound.chat.Chat
 import ltd.matrixstudios.compound.staff.StaffItems
 import ltd.matrixstudios.compound.staff.StaffSuiteVisibilityHandler
 import org.bukkit.Bukkit
+import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
+import org.bukkit.event.entity.EntityInteractEvent
+import org.bukkit.event.player.PlayerInteractEntityEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.metadata.FixedMetadataValue
 import java.util.concurrent.ThreadLocalRandom
@@ -64,6 +67,23 @@ class StaffmodeFunctionalityListener : Listener {
 
                     player.setMetadata("vanish", FixedMetadataValue(CompoundPlugin.instance, true))
                 }
+            }
+        }
+    }
+
+    @EventHandler
+    fun interactWithEntity(e: PlayerInteractEntityEvent) {
+        val player = e.player
+
+        if (player.itemInHand.isSimilar(StaffItems.FREEZE))
+        {
+            if (e.rightClicked is Player)
+            {
+                val clicked = e.rightClicked
+
+                clicked.sendMessage(Chat.format("&c&lYou have been frozen!"))
+
+                clicked.setMetadata("frozen", FixedMetadataValue(CompoundPlugin.instance, true))
             }
         }
     }

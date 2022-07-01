@@ -5,6 +5,7 @@ import ltd.matrixstudios.compound.commands.Command
 import ltd.matrixstudios.compound.commands.bukkit.BukkitCommandFunctions
 import ltd.matrixstudios.compound.staff.StaffSuiteManager
 import ltd.matrixstudios.compound.staff.commands.BasicStaffCommands
+import ltd.matrixstudios.compound.staff.listeners.FrozenPlayerListener
 import ltd.matrixstudios.compound.staff.listeners.GenericStaffmodePreventionListener
 import ltd.matrixstudios.compound.staff.listeners.StaffmodeFunctionalityListener
 import ltd.matrixstudios.framework.menu.library.listener.MenuListener
@@ -34,6 +35,7 @@ class CompoundPlugin : JavaPlugin() {
     fun registerListeners() {
         server.pluginManager.registerEvents(GenericStaffmodePreventionListener(), this)
         server.pluginManager.registerEvents(StaffmodeFunctionalityListener(), this)
+        server.pluginManager.registerEvents(FrozenPlayerListener(), this)
 
         server.pluginManager.registerEvents(MenuListener(), this)
     }
