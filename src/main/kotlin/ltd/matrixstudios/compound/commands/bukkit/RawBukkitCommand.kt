@@ -52,4 +52,13 @@ class RawBukkitCommand(val command: Command) : org.bukkit.command.Command(comman
 
         return true
     }
+
+    init {
+        val commandAliases = command.commandOption.aliases
+
+        if (commandAliases != null)
+        {
+            aliases = commandAliases.toCollection(mutableListOf())
+        }
+    }
 }
