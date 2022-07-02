@@ -59,6 +59,6 @@ object HelpCommands {
                 sender.sendMessage(Chat.format("&aWe have received your report!"))
 
                 reports.add(ReportModel(sender.uniqueId, target.uniqueId, System.currentTimeMillis(), finalArgs.toString()))
-            }
+            }.bindToPlugin()
     }
 }

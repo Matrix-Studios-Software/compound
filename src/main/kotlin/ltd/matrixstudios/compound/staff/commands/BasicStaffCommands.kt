@@ -52,10 +52,20 @@ object BasicStaffCommands {
 
                 val player = sender
 
-                target.setMetadata("frozen", FixedMetadataValue(CompoundPlugin.instance, true))
-                target.sendMessage(Chat.format("&c&lYou have been frozen!"))
+                if (!target.hasMetadata("frozen"))
+                {
+                    target.setMetadata("frozen", FixedMetadataValue(CompoundPlugin.instance, true))
+                    target.sendMessage(Chat.format("&c&lYou have been frozen!"))
 
-                player.sendMessage(Chat.format("&6You froze &f${target.displayName}"))
+                    player.sendMessage(Chat.format("&6You froze &f${target.displayName}"))
+                } else {
+                    target.removeMetadata("frozen", CompoundPlugin.instance)
+                    target.sendMessage(Chat.format("&a&lYou have been unfrozen!"))
+
+                    player.sendMessage(Chat.format("&6You unfroze &f${target.displayName}"))
+                }
+
+
 
             }.bindToPlugin()
     }
