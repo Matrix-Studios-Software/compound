@@ -13,7 +13,7 @@ class PageNavigationMenu(val player: Player, val maxPages: Int, val menu: Pagina
         val buttons = hashMapOf<Int, Button>()
 
         var index = 0
-        for (int in 0 until maxPages)
+        for (int in 1 until maxPages + 1)
         {
             buttons[index++] = PageNavigationButton(int, menu)
         }
