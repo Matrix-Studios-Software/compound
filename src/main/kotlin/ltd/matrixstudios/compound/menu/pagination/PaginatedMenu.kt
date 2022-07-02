@@ -81,11 +81,6 @@ abstract class PaginatedMenu(
                         return
                     }
 
-                    if (page >= getMaximumPages(player)) {
-                        player.sendMessage("${ChatColor.RED}You have already reached the last page!")
-                        return
-                    }
-
                     page -= 1
                     updateMenu()
                 } else if (type == ClickType.RIGHT) {
@@ -112,8 +107,19 @@ abstract class PaginatedMenu(
             }
 
             override fun onClick(player: Player, slot: Int, type: ClickType) {
-                page += 1
-                updateMenu()
+                if (type == ClickType.LEFT)
+                {
+
+                    if (page >= getMaximumPages(player)) {
+                        player.sendMessage("${ChatColor.RED}You have already reached the last page!")
+                        return
+                    }
+
+                    page += 1
+                    updateMenu()
+                } else if (type == ClickType.RIGHT) {
+                    PageNavigationMenu(player, getMaximumPages(player), this@PaginatedMenu).updateMenu()
+                }
             }
         }
 

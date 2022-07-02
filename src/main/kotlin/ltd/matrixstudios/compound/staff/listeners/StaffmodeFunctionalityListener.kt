@@ -4,6 +4,7 @@ import ltd.matrixstudios.compound.CompoundPlugin
 import ltd.matrixstudios.compound.chat.Chat
 import ltd.matrixstudios.compound.staff.StaffItems
 import ltd.matrixstudios.compound.staff.StaffSuiteVisibilityHandler
+import ltd.matrixstudios.compound.staff.menu.StaffOnlineMenu
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
@@ -66,6 +67,11 @@ class StaffmodeFunctionalityListener : Listener {
                     StaffSuiteVisibilityHandler.onEnableVisibility(player)
 
                     player.setMetadata("vanish", FixedMetadataValue(CompoundPlugin.instance, true))
+                }
+
+                if (itemInHand.isSimilar(StaffItems.ONLINE_STAFF))
+                {
+                    StaffOnlineMenu(player).updateMenu()
                 }
             }
         }
