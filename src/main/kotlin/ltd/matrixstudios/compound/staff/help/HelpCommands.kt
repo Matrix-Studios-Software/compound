@@ -42,6 +42,7 @@ object HelpCommands {
                 if (Cooldowns.isOnCooldown(sender.uniqueId, "report"))
                 {
                     sender.sendMessage(Chat.format("&cYou are currently on cooldown!"))
+                    return@handle
                 }
 
                 val finalArgs = BukkitCommandFunctions.constructStringBuilder(args, 1)
