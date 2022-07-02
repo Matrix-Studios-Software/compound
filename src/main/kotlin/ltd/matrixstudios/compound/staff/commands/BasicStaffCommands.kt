@@ -3,7 +3,9 @@ package ltd.matrixstudios.compound.staff.commands
 import ltd.matrixstudios.compound.CompoundPlugin
 import ltd.matrixstudios.compound.chat.Chat
 import ltd.matrixstudios.compound.commands.Command
+import org.bukkit.Bukkit
 import org.bukkit.entity.Player
+import org.bukkit.metadata.FixedMetadataValue
 
 object BasicStaffCommands {
 
@@ -31,5 +33,30 @@ object BasicStaffCommands {
             }.bindToPlugin()
 
 
+        Command().create("freeze")
+            .permission("compound.freeze")
+            .execute().handle { args, sender, command ->
+                if (args.isEmpty())
+                {
+                    sender.sendMessage(Chat.format("&cUsage: /freeze <target>"))
+                    return@handle
+                }
+
+                val target = Bukkit.getPlayer(args[0])
+
+                if (target == null)
+                {
+                    sender.sendMessage(Chat.format("&cThis target does not exist"))
+                    return@handle
+                }
+
+                val player = sender
+
+                target.setMetadata("frozen", FixedMetadataValue(CompoundPlugin.instance, true))
+                target.sendMessage(Chat.format("&c&lYou have been frozen!"))
+                
+                player.sendMessage(Chat.format("&6You froze &f${target.displayName}"))
+
+            }.bindToPlugin()
     }
 }
