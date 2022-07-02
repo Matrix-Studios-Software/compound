@@ -9,6 +9,7 @@ import ltd.matrixstudios.compound.staff.listeners.FrozenPlayerListener
 import ltd.matrixstudios.compound.staff.listeners.GenericStaffmodePreventionListener
 import ltd.matrixstudios.compound.staff.listeners.StaffmodeFunctionalityListener
 import ltd.matrixstudios.compound.menu.listener.MenuListener
+import ltd.matrixstudios.compound.packet.RedisManager
 import ltd.matrixstudios.compound.staff.help.HelpCommands
 import org.bukkit.command.defaults.HelpCommand
 import org.bukkit.plugin.java.JavaPlugin
@@ -26,12 +27,17 @@ class CompoundPlugin : JavaPlugin() {
         instance = this
 
         BukkitCommandFunctions.useCommandMap()
+        loadRedis()
         staffManager = StaffSuiteManager()
 
         registerCommands()
         registerListeners()
 
 
+    }
+
+    fun loadRedis() {
+        RedisManager.load(config.getString("redis.uri"))
     }
 
     fun registerListeners() {

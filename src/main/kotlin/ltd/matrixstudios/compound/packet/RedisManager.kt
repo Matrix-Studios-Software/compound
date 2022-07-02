@@ -13,7 +13,6 @@ import kotlin.concurrent.thread
 object RedisManager {
 
     lateinit var jedis: JedisPool
-    lateinit var resource: Jedis
 
     val gson: Gson =
         GsonBuilder()
@@ -26,17 +25,17 @@ object RedisManager {
     {
         jedis = JedisPool(URI(uri))
 
-        resource = jedis.resource
-
         thread {
-            resource.subscribe(PacketPubSub(), "Compound||Packets||")
+            jedis.resource.use {
+                it.subscribe(PacketPubSub(), "Compound||Packets||")
+            }
         }
     }
 
     fun send(packet: RedisPacket)
     {
         Tasks.async {
-            resource.use { jedis ->
+            jedis.resource.use { jedis ->
                 val encodedPacket = packet.javaClass.name + "|" + gson.toJson(packet)
                 jedis.publish("Compound||Packets||", encodedPacket)
             }
