@@ -54,7 +54,7 @@ object BasicStaffCommands {
 
                 target.setMetadata("frozen", FixedMetadataValue(CompoundPlugin.instance, true))
                 target.sendMessage(Chat.format("&c&lYou have been frozen!"))
-                
+
                 player.sendMessage(Chat.format("&6You froze &f${target.displayName}"))
 
             }.bindToPlugin()

@@ -23,6 +23,7 @@ repositories {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
     compileOnly 'org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT'
+    implementation 'redis.clients:jedis:4.2.3'
 
     implementation fileTree(includes: ['*.jar'], dir: 'lib')
 }
