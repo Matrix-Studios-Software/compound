@@ -1,7 +1,8 @@
-package ltd.matrixstudios.framework.menu.library.pagination
+package ltd.matrixstudios.compound.menu.pagination
 
-import ltd.matrixstudios.framework.menu.library.Button
-import ltd.matrixstudios.framework.menu.library.MenuController
+import ltd.matrixstudios.compound.menu.Button
+import ltd.matrixstudios.compound.menu.MenuController
+import ltd.matrixstudios.compound.menu.navigation.PageNavigationMenu
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.Material
@@ -73,18 +74,23 @@ abstract class PaginatedMenu(
             }
 
             override fun onClick(player: Player, slot: Int, type: ClickType) {
-                if (page == 1) {
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cYou are already on the first page!"))
-                    return
-                }
+                if (type == ClickType.LEFT)
+                {
+                    if (page == 1) {
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cYou are already on the first page!"))
+                        return
+                    }
 
-                if (page >= getMaximumPages(player)) {
-                    player.sendMessage("${ChatColor.RED}You have already reached the last page!")
-                    return
-                }
+                    if (page >= getMaximumPages(player)) {
+                        player.sendMessage("${ChatColor.RED}You have already reached the last page!")
+                        return
+                    }
 
-                page -= 1
-                updateMenu()
+                    page -= 1
+                    updateMenu()
+                } else if (type == ClickType.RIGHT) {
+                    PageNavigationMenu(player, getMaximumPages(player), this@PaginatedMenu).updateMenu()
+                }
             }
         }
 

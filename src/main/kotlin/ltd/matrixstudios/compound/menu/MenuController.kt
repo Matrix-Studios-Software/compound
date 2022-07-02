@@ -1,6 +1,6 @@
-package ltd.matrixstudios.framework.menu.library
+package ltd.matrixstudios.compound.menu
 
-import ltd.matrixstudios.framework.menu.library.pagination.PaginatedMenu
+import ltd.matrixstudios.compound.menu.pagination.PaginatedMenu
 import org.bukkit.entity.Player
 import java.util.*
 

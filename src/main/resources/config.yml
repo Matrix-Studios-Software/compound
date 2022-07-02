@@ -1,3 +1,5 @@
-mongo:
-  uri: "mongodb://localhost:27017"
-  database: "Compound"
+redis:
+  uri: "redis://localhost:6379?db=0"
+
+report:
+  message: "&7[Report] &r%displayName% &7has been reported for &f%reason%"

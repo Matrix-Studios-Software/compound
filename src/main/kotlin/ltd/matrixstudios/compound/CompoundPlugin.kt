@@ -8,7 +8,9 @@ import ltd.matrixstudios.compound.staff.commands.BasicStaffCommands
 import ltd.matrixstudios.compound.staff.listeners.FrozenPlayerListener
 import ltd.matrixstudios.compound.staff.listeners.GenericStaffmodePreventionListener
 import ltd.matrixstudios.compound.staff.listeners.StaffmodeFunctionalityListener
-import ltd.matrixstudios.framework.menu.library.listener.MenuListener
+import ltd.matrixstudios.compound.menu.listener.MenuListener
+import ltd.matrixstudios.compound.staff.help.HelpCommands
+import org.bukkit.command.defaults.HelpCommand
 import org.bukkit.plugin.java.JavaPlugin
 
 class CompoundPlugin : JavaPlugin() {
@@ -43,6 +45,7 @@ class CompoundPlugin : JavaPlugin() {
     fun registerCommands() {
         Command().create("test").execute().handle { args, sender, command -> sender.sendMessage(Chat.format("&cTest")) }.bindToPlugin()
         BasicStaffCommands.register()
+        HelpCommands.registerAll()
     }
 
 

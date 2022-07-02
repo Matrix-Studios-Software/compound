@@ -1,4 +1,4 @@
-package ltd.matrixstudios.framework.menu.library
+package ltd.matrixstudios.compound.menu
 
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player

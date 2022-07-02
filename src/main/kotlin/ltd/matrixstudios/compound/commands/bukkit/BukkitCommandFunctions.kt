@@ -11,20 +11,36 @@ object BukkitCommandFunctions {
 
     var commands = hashMapOf<String, Command>()
 
-    fun useCommandMap() {
+    fun useCommandMap()
+    {
         val map = SimplePluginManager::class.java.getDeclaredField("commandMap").apply { this.isAccessible = true }
 
         commandMap = map.get(CompoundPlugin.instance.server.pluginManager) as SimpleCommandMap
     }
 
-    fun registerWithCommandMap(command: Command) {
+    fun registerWithCommandMap(command: Command)
+    {
         commandMap.register("", RawBukkitCommand(command))
     }
 
-    fun register(command: Command) {
+    fun register(command: Command)
+    {
         commands[command.commandOption.name] = command
 
         registerWithCommandMap(command)
     }
+
+    fun constructStringBuilder(args: Array<out String>, index: Int) : java.lang.StringBuilder
+    {
+        val builder = StringBuilder()
+
+        for (i in index until args.size)
+        {
+            builder.append(args[i]).append(" ")
+        }
+
+        return builder
+    }
+
 
 }

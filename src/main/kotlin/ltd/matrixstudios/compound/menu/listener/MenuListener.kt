@@ -1,6 +1,6 @@
-package ltd.matrixstudios.framework.menu.library.listener
+package ltd.matrixstudios.compound.menu.listener
 
-import ltd.matrixstudios.framework.menu.library.MenuController
+import ltd.matrixstudios.compound.menu.MenuController
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
