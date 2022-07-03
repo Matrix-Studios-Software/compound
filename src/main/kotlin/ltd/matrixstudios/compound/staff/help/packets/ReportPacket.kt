@@ -7,7 +7,8 @@ import org.bukkit.Bukkit
 
 class ReportPacket(
     val targetDisplayName: String,
-    val reason: String
+    val reason: String,
+    val reporterDisplayname: String
 ) : RedisPacket("compound-report") {
 
     override fun action()
@@ -16,8 +17,9 @@ class ReportPacket(
 
         showingPlayers.forEach {
             val message = CompoundPlugin.instance.config.getString("report.message")
-                .replace("%displayName%", Chat.format(targetDisplayName))
+                .replace("%target%", Chat.format(targetDisplayName))
                 .replace("%reason%", reason)
+                .replace("%reporter%", Chat.format(reporterDisplayname))
 
             it.sendMessage(Chat.format(message))
         }

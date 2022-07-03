@@ -26,7 +26,7 @@ class StaffOnlineMenu(val player: Player) : PaginatedMenu(18, player) {
     }
 
 
-    class StaffOnlineButton(player: Player) : Button() {
+    class StaffOnlineButton(val target: Player) : Button() {
         override fun getMaterial(player: Player): Material {
             return Material.SKULL_ITEM
         }
@@ -34,15 +34,15 @@ class StaffOnlineMenu(val player: Player) : PaginatedMenu(18, player) {
         override fun getDescription(player: Player): MutableList<String>? {
             val desc = arrayListOf<String>()
             desc.add(Chat.format("&7&m---------------"))
-            desc.add(Chat.format("&eModMode: &r" + if (player.hasMetadata("modmode")) "&aTrue" else "&cFalse"))
-            desc.add(Chat.format("&eVanished: &r" + if (player.hasMetadata("vanish")) "&aTrue" else "&cFalse"))
+            desc.add(Chat.format("&eModMode: &r" + if (target.hasMetadata("modmode")) "&aTrue" else "&cFalse"))
+            desc.add(Chat.format("&eVanished: &r" + if (target.hasMetadata("vanish")) "&aTrue" else "&cFalse"))
             desc.add(Chat.format("&7&m---------------"))
 
             return desc
         }
 
         override fun getDisplayName(player: Player): String? {
-           return player.displayName
+           return target.displayName
         }
 
         override fun getData(player: Player): Short {

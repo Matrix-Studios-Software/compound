@@ -53,7 +53,7 @@ object HelpCommands {
                     return@handle
                 }
 
-                RedisManager.send(ReportPacket(target.displayName, finalArgs.toString()))
+                RedisManager.send(ReportPacket(target.displayName, finalArgs.toString(), sender.displayName))
 
                 Cooldowns.addCooldown("report", sender.uniqueId, TimeUnit.MINUTES.toMillis(1))
 

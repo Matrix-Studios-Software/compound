@@ -7,7 +7,7 @@ object StaffItems {
 
     val COMPASS = ItemBuilder.of(Material.COMPASS).name("&bCompass").build()
     val INVENTORY_INSPECT = ItemBuilder.of(Material.BOOK).name("&bInspect Inventory").build()
-    val RANDOMTP = ItemBuilder.of(Material.EYE_OF_ENDER).name("&bRandom TP").build()
+    val RANDOMTP = ItemBuilder.of(Material.BEACON).name("&bRandom TP").build()
     val BETTER_VIEW = ItemBuilder.of(Material.CARPET).data(7).name("&bBetter view").build()
     val ONLINE_STAFF = ItemBuilder.of(Material.SKULL_ITEM).name("&bOnline Staff").build()
     val VANISH = ItemBuilder.of(Material.INK_SACK).data(8).name("&bUnvanish").build()

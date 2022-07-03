@@ -2,4 +2,4 @@ redis:
   uri: "redis://localhost:6379?db=0"
 
 report:
-  message: "&7[Report] &r%displayName% &7has been reported for &f%reason%"
+  message: "&9[Report] &r%target% reported by &r%reporter%\n     &9Reason: &7%reason%"

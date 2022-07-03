@@ -29,6 +29,7 @@ class StaffmodeFunctionalityListener : Listener {
 
                 val itemInHand = player.itemInHand
 
+
                 if (itemInHand.isSimilar(StaffItems.RANDOMTP))
                 {
                     val actualPlayer = Bukkit.getOnlinePlayers().shuffled().first()
@@ -71,6 +72,7 @@ class StaffmodeFunctionalityListener : Listener {
 
                 if (itemInHand.isSimilar(StaffItems.ONLINE_STAFF))
                 {
+                    e.isCancelled = true
                     StaffOnlineMenu(player).updateMenu()
                 }
             }
@@ -87,6 +89,9 @@ class StaffmodeFunctionalityListener : Listener {
             {
                 val clicked = e.rightClicked
 
+                e.isCancelled = true
+
+                player.sendMessage(Chat.format("&6You froze &f${clicked.name}"))
                 clicked.sendMessage(Chat.format("&c&lYou have been frozen!"))
 
                 clicked.setMetadata("frozen", FixedMetadataValue(CompoundPlugin.instance, true))
