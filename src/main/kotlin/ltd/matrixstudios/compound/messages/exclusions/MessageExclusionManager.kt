@@ -11,7 +11,7 @@ object MessageExclusionManager {
         val ignoredList = mutableListOf<UUID>()
 
         val players = RedisManager.jedis.resource.use {
-            it.hgetAll("Compound::Messages::${uuid.toString()}")
+            it.hgetAll("Compound::Messages::Ignorelist::${uuid.toString()}")
         }
 
         for (uuid in players.keys)
@@ -31,7 +31,7 @@ object MessageExclusionManager {
     {
         RedisManager.jedis.resource.use {
             it.hset(
-                "Compound::Messages::${player.uniqueId.toString()}",
+                "Compound::Messages::Ignorelist::${player.uniqueId.toString()}",
                 target.uniqueId.toString(),
                 "true"
             )
@@ -42,7 +42,7 @@ object MessageExclusionManager {
     {
         RedisManager.jedis.resource.use {
             it.hdel(
-                "Compound::Messages::${player.uniqueId.toString()}",
+                "Compound::Messages::Ignorelist::${player.uniqueId.toString()}",
                 target.uniqueId.toString()
             )
         }
