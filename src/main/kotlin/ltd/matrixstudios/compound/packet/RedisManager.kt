@@ -27,7 +27,7 @@ object RedisManager {
 
         thread {
             jedis.resource.use {
-                it.subscribe(PacketPubSub(), "Compound||Packets||")
+                it.subscribe(PacketPubSub(), "Compound::Packets::")
             }
         }
     }
@@ -37,7 +37,7 @@ object RedisManager {
         Tasks.async {
             jedis.resource.use { jedis ->
                 val encodedPacket = packet.javaClass.name + "|" + gson.toJson(packet)
-                jedis.publish("Compound||Packets||", encodedPacket)
+                jedis.publish("Compound::Packets::", encodedPacket)
             }
         }
 

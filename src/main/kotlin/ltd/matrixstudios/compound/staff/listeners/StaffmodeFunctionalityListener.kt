@@ -8,6 +8,7 @@ import ltd.matrixstudios.compound.staff.menu.StaffOnlineMenu
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
+import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
 import org.bukkit.event.entity.EntityInteractEvent
@@ -18,7 +19,7 @@ import java.util.concurrent.ThreadLocalRandom
 
 class StaffmodeFunctionalityListener : Listener {
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     fun interact(e: PlayerInteractEvent) {
         val player = e.player
 
@@ -32,6 +33,7 @@ class StaffmodeFunctionalityListener : Listener {
 
                 if (itemInHand.isSimilar(StaffItems.RANDOMTP))
                 {
+                    e.isCancelled = true
                     val actualPlayer = Bukkit.getOnlinePlayers().shuffled().first()
 
                     if (actualPlayer == null)
@@ -46,7 +48,6 @@ class StaffmodeFunctionalityListener : Listener {
                         return
                     }
 
-                    e.isCancelled = true
 
                     player.teleport(actualPlayer)
                     player.sendMessage(Chat.format("&6Teleporting&f..."))
@@ -85,13 +86,13 @@ class StaffmodeFunctionalityListener : Listener {
 
         if (player.itemInHand.isSimilar(StaffItems.FREEZE))
         {
+
+            e.isCancelled = true
             if (e.rightClicked != null && e.rightClicked is Player)
             {
                 val clicked = e.rightClicked
 
-                e.isCancelled = true
 
-                player.sendMessage(Chat.format("&6You froze &f${clicked.name}"))
                 clicked.sendMessage(Chat.format("&c&lYou have been frozen!"))
 
                 clicked.setMetadata("frozen", FixedMetadataValue(CompoundPlugin.instance, true))

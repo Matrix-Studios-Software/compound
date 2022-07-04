@@ -3,3 +3,7 @@ redis:
 
 report:
   message: "&9[Report] &r%target% reported by &r%reporter%\n     &9Reason: &7%reason%"
+
+messages:
+  from: "&7(From: %displayname%&7) %message%"
+  to: "&7(To: %displayname%&7) %message%"

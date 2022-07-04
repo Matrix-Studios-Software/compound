@@ -1,5 +1,6 @@
 package ltd.matrixstudios.compound
 
+import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException
 import ltd.matrixstudios.compound.chat.Chat
 import ltd.matrixstudios.compound.commands.Command
 import ltd.matrixstudios.compound.commands.bukkit.BukkitCommandFunctions
@@ -9,6 +10,8 @@ import ltd.matrixstudios.compound.staff.listeners.FrozenPlayerListener
 import ltd.matrixstudios.compound.staff.listeners.GenericStaffmodePreventionListener
 import ltd.matrixstudios.compound.staff.listeners.StaffmodeFunctionalityListener
 import ltd.matrixstudios.compound.menu.listener.MenuListener
+import ltd.matrixstudios.compound.messages.commands.BasicMessageCommands
+import ltd.matrixstudios.compound.messages.exclusions.commands.MessagingExclusionCommands
 import ltd.matrixstudios.compound.packet.RedisManager
 import ltd.matrixstudios.compound.staff.help.HelpCommands
 import org.bukkit.command.defaults.HelpCommand
@@ -52,6 +55,8 @@ class CompoundPlugin : JavaPlugin() {
         Command().create("test").execute().handle { args, sender, command -> sender.sendMessage(Chat.format("&cTest")) }.bindToPlugin()
         BasicStaffCommands.register()
         HelpCommands.registerAll()
+        BasicMessageCommands.registerAll()
+        MessagingExclusionCommands.registerAll()
     }
 
 
