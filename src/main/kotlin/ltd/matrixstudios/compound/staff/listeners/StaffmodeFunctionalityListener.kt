@@ -80,13 +80,12 @@ class StaffmodeFunctionalityListener : Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     fun interactWithEntity(e: PlayerInteractEntityEvent) {
         val player = e.player
 
         if (player.itemInHand.isSimilar(StaffItems.FREEZE))
         {
-
             e.isCancelled = true
             if (e.rightClicked != null && e.rightClicked is Player)
             {
