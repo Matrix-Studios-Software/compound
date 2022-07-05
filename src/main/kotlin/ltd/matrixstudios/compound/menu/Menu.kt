@@ -42,7 +42,7 @@ abstract class Menu(
                     cancel()
                 }
 
-                if (MenuController.paginatedMenuMap.containsKey(player.uniqueId))
+                if (MenuController.menuMap.containsKey(player.uniqueId))
                 {
                     val inventory = player.openInventory.topInventory
 
