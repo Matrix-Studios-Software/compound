@@ -120,7 +120,7 @@ object PollManager {
             val poll = Poll(UUID.randomUUID(), whatFor.toString(), option1, option2, hashMapOf())
             startPoll(poll)
             sender.sendMessage(Chat.format("&aStarted a poll!"))
-        }
+        }.bindToPlugin()
 
         Command().create("forcestoppoll").permission("compound.polls.admin").execute().handle { args, sender, command ->
             activePoll = null

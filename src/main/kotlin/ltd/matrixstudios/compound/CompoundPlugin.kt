@@ -12,6 +12,7 @@ import ltd.matrixstudios.compound.staff.listeners.StaffmodeFunctionalityListener
 import ltd.matrixstudios.compound.menu.listener.MenuListener
 import ltd.matrixstudios.compound.messages.commands.BasicMessageCommands
 import ltd.matrixstudios.compound.messages.exclusions.commands.MessagingExclusionCommands
+import ltd.matrixstudios.compound.misc.polls.PollManager
 import ltd.matrixstudios.compound.packet.RedisManager
 import ltd.matrixstudios.compound.staff.help.HelpCommands
 import org.bukkit.command.defaults.HelpCommand
@@ -59,6 +60,7 @@ class CompoundPlugin : JavaPlugin() {
         HelpCommands.registerAll()
         BasicMessageCommands.registerAll()
         MessagingExclusionCommands.registerAll()
+        PollManager.registerCommands()
     }
 
 
