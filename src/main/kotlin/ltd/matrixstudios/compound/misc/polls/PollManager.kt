@@ -39,7 +39,7 @@ object PollManager {
                 seconds--
             }
 
-        }
+        }.runTaskTimer(CompoundPlugin.instance, 0L, 18L)
     }
 
     fun closePoll()
