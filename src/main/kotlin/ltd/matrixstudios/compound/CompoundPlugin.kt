@@ -53,7 +53,9 @@ class CompoundPlugin : JavaPlugin() {
 
     fun registerCommands() {
         Command().create("test").execute().handle { args, sender, command -> sender.sendMessage(Chat.format("&cTest")) }.bindToPlugin()
-        BasicStaffCommands.register()
+
+        //companion objects because I dont want a ton of object classes
+        BasicStaffCommands.registerAll()
         HelpCommands.registerAll()
         BasicMessageCommands.registerAll()
         MessagingExclusionCommands.registerAll()

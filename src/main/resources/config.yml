@@ -7,3 +7,8 @@ report:
 messages:
   from: "&7(From: %displayname%&7) %message%"
   to: "&7(To: %displayname%&7) %message%"
+
+polls:
+  startMessage: "&8[&eServer&8] &fA poll has just started"
+  intervalMessage: "&8[&eServer&8] &fPoll closes in &a60s"
+  endMessage: "&8[&eServer&8] &fThe poll has ended. %entry% won!"

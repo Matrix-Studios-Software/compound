@@ -86,11 +86,12 @@ class StaffmodeFunctionalityListener : Listener {
 
         if (player.itemInHand.isSimilar(StaffItems.FREEZE))
         {
-            e.isCancelled = true
             if (e.rightClicked != null && e.rightClicked is Player)
             {
-                val clicked = e.rightClicked
+                e.isCancelled = true
 
+
+                val clicked = e.rightClicked
 
                 clicked.sendMessage(Chat.format("&c&lYou have been frozen!"))
 

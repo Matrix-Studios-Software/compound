@@ -10,56 +10,60 @@ import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import java.util.concurrent.TimeUnit
 
-object HelpCommands {
+class HelpCommands {
 
-    val reports = arrayListOf<ReportModel>()
+    companion object {
+        val reports = arrayListOf<ReportModel>()
 
-    fun registerAll() {
-        Command().create("report")
-            .requirePlayer()
-            .execute().handle { args, sender, command ->
+        fun registerAll() {
+            Command().create("report")
+                .requirePlayer()
+                .execute().handle { args, sender, command ->
 
-                if (sender !is Player)
-                {
-                    sender.sendMessage(Chat.format("&cThis command is player only"))
-                    return@handle
-                }
+                    if (sender !is Player) {
+                        sender.sendMessage(Chat.format("&cThis command is player only"))
+                        return@handle
+                    }
 
-                if (args.isEmpty())
-                {
-                    sender.sendMessage(Chat.format("&cUsage: /report <target> <reason>"))
-                    return@handle
-                }
+                    if (args.isEmpty()) {
+                        sender.sendMessage(Chat.format("&cUsage: /report <target> <reason>"))
+                        return@handle
+                    }
 
-                val target = Bukkit.getPlayer(args[0])
+                    val target = Bukkit.getPlayer(args[0])
 
-                if (target == null)
-                {
-                    sender.sendMessage(Chat.format("&cThis target does not exist"))
-                    return@handle
-                }
+                    if (target == null) {
+                        sender.sendMessage(Chat.format("&cThis target does not exist"))
+                        return@handle
+                    }
 
-                if (Cooldowns.isOnCooldown(sender.uniqueId, "report"))
-                {
-                    sender.sendMessage(Chat.format("&cYou are currently on cooldown!"))
-                    return@handle
-                }
+                    if (Cooldowns.isOnCooldown(sender.uniqueId, "report")) {
+                        sender.sendMessage(Chat.format("&cYou are currently on cooldown!"))
+                        return@handle
+                    }
 
-                val finalArgs = BukkitCommandFunctions.constructStringBuilder(args, 1)
+                    val finalArgs = BukkitCommandFunctions.constructStringBuilder(args, 1)
 
-                if (finalArgs.isEmpty())
-                {
-                    sender.sendMessage(Chat.format("&cYou must supply a reason!"))
-                    return@handle
-                }
+                    if (finalArgs.isEmpty()) {
+                        sender.sendMessage(Chat.format("&cYou must supply a reason!"))
+                        return@handle
+                    }
 
-                RedisManager.send(ReportPacket(target.displayName, finalArgs.toString(), sender.displayName))
+                    RedisManager.send(ReportPacket(target.displayName, finalArgs.toString(), sender.displayName))
 
-                Cooldowns.addCooldown("report", sender.uniqueId, TimeUnit.MINUTES.toMillis(1))
+                    Cooldowns.addCooldown("report", sender.uniqueId, TimeUnit.MINUTES.toMillis(1))
 
-                sender.sendMessage(Chat.format("&aWe have received your report!"))
+                    sender.sendMessage(Chat.format("&aWe have received your report!"))
 
-                reports.add(ReportModel(sender.uniqueId, target.uniqueId, System.currentTimeMillis(), finalArgs.toString()))
-            }.bindToPlugin()
+                    reports.add(
+                        ReportModel(
+                            sender.uniqueId,
+                            target.uniqueId,
+                            System.currentTimeMillis(),
+                            finalArgs.toString()
+                        )
+                    )
+                }.bindToPlugin()
+        }
     }
 }
