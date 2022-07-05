@@ -42,14 +42,20 @@ abstract class Menu(
                     cancel()
                 }
 
-                val inventory = player.openInventory.topInventory
-
-                inventory.clear()
-
-                for (item in getAllButtons())
+                if (MenuController.paginatedMenuMap.containsKey(player.uniqueId))
                 {
-                    inventory.setItem(item.key, item.value.constructItemStack(player))
+                    val inventory = player.openInventory.topInventory
+
+                    inventory.clear()
+
+                    for (item in getAllButtons())
+                    {
+                        inventory.setItem(item.key, item.value.constructItemStack(player))
+                    }
+                } else {
+                    cancel()
                 }
+
             }
 
         }.runTaskTimer(CompoundPlugin.instance, 20L, 10L)
