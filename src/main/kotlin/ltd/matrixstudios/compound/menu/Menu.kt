@@ -1,7 +1,9 @@
 package ltd.matrixstudios.compound.menu
 
+import ltd.matrixstudios.compound.CompoundPlugin
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
+import org.bukkit.scheduler.BukkitRunnable
 import java.util.concurrent.CompletableFuture
 
 abstract class Menu(
@@ -17,6 +19,7 @@ abstract class Menu(
     }
 
 
+
     fun openMenu() {
         val inventory = Bukkit.createInventory(null, size, getTitle(player))
 
@@ -29,8 +32,27 @@ abstract class Menu(
             }
         }
 
-
         player.openInventory(inventory)
+
+        object : BukkitRunnable() {
+
+            override fun run() {
+                if (!player.isOnline)
+                {
+                    cancel()
+                }
+
+                val inventory = player.openInventory.topInventory
+
+                inventory.clear()
+
+                for (item in getAllButtons())
+                {
+                    inventory.setItem(item.key, item.value.constructItemStack(player))
+                }
+            }
+
+        }.runTaskTimer(CompoundPlugin.instance, 20L, 10L)
 
     }
 
