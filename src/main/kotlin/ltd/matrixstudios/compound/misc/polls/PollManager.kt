@@ -49,7 +49,7 @@ object PollManager {
         val optOneVotes = poll.totalVotes.values.filter { it == poll.optionOne }.size
         val optTwoVotes = poll.totalVotes.values.filter { it == poll.optionTwo }.size
 
-        val message = CompoundPlugin.instance.config.getString("polls.endMessage")
+        val message = Chat.format(CompoundPlugin.instance.config.getString("polls.endMessage"))
 
         if (optOneVotes > optTwoVotes)
         {
