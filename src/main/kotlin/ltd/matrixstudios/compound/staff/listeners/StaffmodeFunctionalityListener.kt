@@ -79,24 +79,4 @@ class StaffmodeFunctionalityListener : Listener {
             }
         }
     }
-
-    @EventHandler(priority = EventPriority.HIGHEST)
-    fun interactWithEntity(e: PlayerInteractEntityEvent) {
-        val player = e.player
-
-        if (player.itemInHand.isSimilar(StaffItems.FREEZE))
-        {
-            if (e.rightClicked != null && e.rightClicked is Player)
-            {
-                e.isCancelled = true
-
-
-                val clicked = e.rightClicked
-
-                clicked.sendMessage(Chat.format("&c&lYou have been frozen!"))
-
-                clicked.setMetadata("frozen", FixedMetadataValue(CompoundPlugin.instance, true))
-            }
-        }
-    }
 }

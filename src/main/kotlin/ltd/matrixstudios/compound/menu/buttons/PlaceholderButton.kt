@@ -7,8 +7,8 @@ import org.bukkit.event.inventory.ClickType
 
 class PlaceholderButton(
     val material: Material,
-    val description: MutableList<String>,
-    val name: String, val data: Short
+    val description: MutableList<String>?,
+    val name: String?, val data: Short
 ) : Button() {
 
     override fun getMaterial(player: Player): Material {
@@ -16,11 +16,20 @@ class PlaceholderButton(
     }
 
     override fun getDescription(player: Player): MutableList<String>? {
-        return description
+        if (description != null)
+        {
+            return description
+        } else return mutableListOf()
     }
 
     override fun getDisplayName(player: Player): String? {
-        return name
+        if (name != null)
+        {
+            return name
+        } else {
+            return material.name
+        }
+
     }
 
     override fun getData(player: Player): Short {

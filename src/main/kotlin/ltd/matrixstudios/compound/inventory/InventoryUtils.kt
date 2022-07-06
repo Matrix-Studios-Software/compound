@@ -43,7 +43,10 @@ object InventoryUtils {
 
         for (item in items)
         {
-            hashMap[items.indexOf(item)] = item
+            if (item != null)
+            {
+                hashMap[items.indexOf(item)] = item
+            }
         }
 
         return hashMap
