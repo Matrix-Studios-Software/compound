@@ -34,6 +34,7 @@ abstract class Menu(
 
         player.openInventory(inventory)
 
+
         object : BukkitRunnable() {
 
             override fun run() {

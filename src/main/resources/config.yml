@@ -12,3 +12,13 @@ polls:
   startMessage: "&8[&eServer&8] &fA poll has just started"
   intervalMessage: "&8[&eServer&8] &fPoll closes in &a60s"
   endMessage: "&8[&eServer&8] &fThe poll has ended. %entry% won!"
+
+slowchat:
+  bypass: "compound.slowchat.bypass"
+  message: "&cYou may chat again in %seconds% seconds. To bypass this, purcase a rank at &lhello.com"
+  seconds: 3
+
+mutechat:
+  muted: "&aChat has been muted by %displayname%"
+  unmuted: "&cChat has been unmuted by %displayname$"
+  bypass: "compound.mutechat.bypass"

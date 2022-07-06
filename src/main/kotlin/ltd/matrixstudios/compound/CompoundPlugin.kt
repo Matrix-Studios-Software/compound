@@ -1,7 +1,9 @@
 package ltd.matrixstudios.compound
 
-import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException
 import ltd.matrixstudios.compound.chat.Chat
+import ltd.matrixstudios.compound.chat.management.ChatManagmentHandler
+import ltd.matrixstudios.compound.chat.management.MuteChatListener
+import ltd.matrixstudios.compound.chat.management.SlowChatListener
 import ltd.matrixstudios.compound.commands.Command
 import ltd.matrixstudios.compound.commands.bukkit.BukkitCommandFunctions
 import ltd.matrixstudios.compound.staff.StaffSuiteManager
@@ -36,31 +38,33 @@ class CompoundPlugin : JavaPlugin() {
 
         registerCommands()
         registerListeners()
-
-
     }
 
-    fun loadRedis() {
+    fun loadRedis()
+    {
         RedisManager.load(config.getString("redis.uri"))
     }
 
-    fun registerListeners() {
+    fun registerListeners()
+    {
         server.pluginManager.registerEvents(GenericStaffmodePreventionListener(), this)
         server.pluginManager.registerEvents(StaffmodeFunctionalityListener(), this)
         server.pluginManager.registerEvents(FrozenPlayerListener(), this)
 
         server.pluginManager.registerEvents(MenuListener(), this)
+
+        server.pluginManager.registerEvents(SlowChatListener(), this)
+        server.pluginManager.registerEvents(MuteChatListener(), this)
     }
 
-    fun registerCommands() {
-        Command().create("test").execute().handle { args, sender, command -> sender.sendMessage(Chat.format("&cTest")) }.bindToPlugin()
-
-        //companion objects because I dont want a ton of object classes
+    fun registerCommands()
+    {
         BasicStaffCommands.registerAll()
         HelpCommands.registerAll()
         BasicMessageCommands.registerAll()
         MessagingExclusionCommands.registerAll()
         PollManager.registerCommands()
+        ChatManagmentHandler.registerCommands()
     }
 
 
