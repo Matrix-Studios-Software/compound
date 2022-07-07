@@ -16,6 +16,9 @@ import ltd.matrixstudios.compound.messages.commands.BasicMessageCommands
 import ltd.matrixstudios.compound.messages.exclusions.commands.MessagingExclusionCommands
 import ltd.matrixstudios.compound.misc.polls.PollManager
 import ltd.matrixstudios.compound.packet.RedisManager
+import ltd.matrixstudios.compound.player.gamemode.GamemodeCreativeCommand
+import ltd.matrixstudios.compound.player.gamemode.GamemodeSurvivalCommand
+import ltd.matrixstudios.compound.player.gamemode.GeneralGamemodeCommand
 import ltd.matrixstudios.compound.staff.help.HelpCommands
 import org.bukkit.command.defaults.HelpCommand
 import org.bukkit.plugin.java.JavaPlugin
@@ -65,6 +68,10 @@ class CompoundPlugin : JavaPlugin() {
         MessagingExclusionCommands.registerAll()
         PollManager.registerCommands()
         ChatManagmentHandler.registerCommands()
+
+        GamemodeCreativeCommand.registerCommand()
+        GamemodeSurvivalCommand.registerCommand()
+        GeneralGamemodeCommand.registerCommand()
     }
 
 

@@ -13,10 +13,14 @@ class MuteChatListener : Listener {
     {
         val player = e.player
 
-        if (!player.hasPermission(CompoundPlugin.instance.config.getString("mutechat.bypass")))
+        if (ChatManagmentHandler.chatMuted)
         {
-            e.isCancelled = true
-            player.sendMessage(Chat.format("&cChat is currently muted!"))
+            if (!player.hasPermission(CompoundPlugin.instance.config.getString("mutechat.bypass")))
+            {
+                e.isCancelled = true
+                player.sendMessage(Chat.format("&cChat is currently muted!"))
+            }
         }
+
     }
 }
