@@ -6,6 +6,7 @@ import ltd.matrixstudios.compound.chat.management.MuteChatListener
 import ltd.matrixstudios.compound.chat.management.SlowChatListener
 import ltd.matrixstudios.compound.commands.Command
 import ltd.matrixstudios.compound.commands.bukkit.BukkitCommandFunctions
+import ltd.matrixstudios.compound.lunar.LunarWaypointManager
 import ltd.matrixstudios.compound.staff.StaffSuiteManager
 import ltd.matrixstudios.compound.staff.commands.BasicStaffCommands
 import ltd.matrixstudios.compound.staff.listeners.FrozenPlayerListener
@@ -38,6 +39,7 @@ class CompoundPlugin : JavaPlugin() {
         BukkitCommandFunctions.useCommandMap()
         loadRedis()
         staffManager = StaffSuiteManager()
+        LunarWaypointManager.loadWaypoints()
 
         registerCommands()
         registerListeners()
@@ -73,6 +75,7 @@ class CompoundPlugin : JavaPlugin() {
         GamemodeCreativeCommand.registerCommand()
         GamemodeSurvivalCommand.registerCommand()
         GeneralGamemodeCommand.registerCommand()
+
     }
 
 

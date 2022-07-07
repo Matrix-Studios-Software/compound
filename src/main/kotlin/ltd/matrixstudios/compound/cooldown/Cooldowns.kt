@@ -16,7 +16,7 @@ object Cooldowns {
 
     fun isOnCooldown(uuid: UUID, cooldown: String) : Boolean
     {
-        return cooldownTable.containsColumn(uuid) && cooldownTable.get(cooldown, uuid) >= System.currentTimeMillis()
+        return cooldownTable.contains(cooldown, uuid) && cooldownTable.get(cooldown, uuid) >= System.currentTimeMillis()
     }
 
 }

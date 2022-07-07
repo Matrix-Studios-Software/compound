@@ -2,7 +2,7 @@ redis:
   uri: "redis://localhost:6379?db=0"
 
 report:
-  message: "&9[Report] &r%target% reported by &r%reporter%\n     &9Reason: &7%reason%"
+  message: "&9[Report] &r%target% &7reported by &r%reporter%\n     &9Reason: &7%reason%"
 
 messages:
   from: "&7(From: %displayname%&7) %message%"
@@ -26,3 +26,12 @@ mutechat:
 gamemode:
   creative: "&aYou have went into Creative mode!"
   survival: "&aYou have went into Survival mode!"
+
+waypoints:
+  spawn:
+    x: 0
+    y: 100
+    z: 0
+    world: "world"
+    color: "GREEN"
+
