@@ -18,12 +18,15 @@ repositories {
     maven {
         url 'https://jitpack.io'
     }
+
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
     compileOnly 'org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT'
     implementation 'redis.clients:jedis:4.2.3'
+
+    compileOnly 'com.lunarclient:bukkitapi:1.0-SNAPSHOT'
 
     implementation fileTree(includes: ['*.jar'], dir: 'lib')
 }

@@ -58,6 +58,7 @@ class CompoundPlugin : JavaPlugin() {
 
         server.pluginManager.registerEvents(SlowChatListener(), this)
         server.pluginManager.registerEvents(MuteChatListener(), this)
+
     }
 
     fun registerCommands()
