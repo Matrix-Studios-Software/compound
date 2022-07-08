@@ -6,6 +6,8 @@ import ltd.matrixstudios.compound.chat.management.MuteChatListener
 import ltd.matrixstudios.compound.chat.management.SlowChatListener
 import ltd.matrixstudios.compound.commands.Command
 import ltd.matrixstudios.compound.commands.bukkit.BukkitCommandFunctions
+import ltd.matrixstudios.compound.kits.KitManager
+import ltd.matrixstudios.compound.kits.command.KitCommands
 import ltd.matrixstudios.compound.lunar.LunarWaypointManager
 import ltd.matrixstudios.compound.staff.StaffSuiteManager
 import ltd.matrixstudios.compound.staff.commands.BasicStaffCommands
@@ -40,6 +42,7 @@ class CompoundPlugin : JavaPlugin() {
         loadRedis()
         staffManager = StaffSuiteManager()
         LunarWaypointManager.loadWaypoints()
+        KitManager.loadKits()
 
         registerCommands()
         registerListeners()
@@ -75,6 +78,8 @@ class CompoundPlugin : JavaPlugin() {
         GamemodeCreativeCommand.registerCommand()
         GamemodeSurvivalCommand.registerCommand()
         GeneralGamemodeCommand.registerCommand()
+
+        KitCommands.registerCommand()
 
     }
 
