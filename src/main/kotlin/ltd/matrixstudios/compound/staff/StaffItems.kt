@@ -1,6 +1,6 @@
 package ltd.matrixstudios.compound.staff
 
-import ltd.matrixstudios.compound.items.ItemBuilder
+import ltd.matrixstudios.compound.inventory.ItemBuilder
 import org.bukkit.Material
 
 object StaffItems {

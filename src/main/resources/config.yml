@@ -37,5 +37,14 @@ waypoints:
     y: 100
     z: 0
     world: "world"
-    color: "GREEN"
+    color: "GREEN" #Java Coloring
+
+modules:
+  staffSuite: true
+  messages: true
+  kits: true
+  gamemode: true
+  reportsAndRequests: true
+  polls: true
+  chatManagement: true
 

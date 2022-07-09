@@ -68,18 +68,45 @@ class CompoundPlugin : JavaPlugin() {
 
     fun registerCommands()
     {
-        BasicStaffCommands.registerAll()
-        HelpCommands.registerAll()
-        BasicMessageCommands.registerAll()
-        MessagingExclusionCommands.registerAll()
-        PollManager.registerCommands()
-        ChatManagmentHandler.registerCommands()
+        val config = this.config
+        if (config.getBoolean("modules.staffSuite"))
+        {
+            BasicStaffCommands.registerAll()
+        }
 
-        GamemodeCreativeCommand.registerCommand()
-        GamemodeSurvivalCommand.registerCommand()
-        GeneralGamemodeCommand.registerCommand()
+        if (config.getBoolean("modules.reportsAndRequests"))
+        {
+            HelpCommands.registerAll()
+        }
 
-        KitCommands.registerCommands()
+        if (config.getBoolean("modules.reportsAndRequests"))
+        {
+            BasicMessageCommands.registerAll()
+            MessagingExclusionCommands.registerAll()
+        }
+
+        if (config.getBoolean("modules.polls"))
+        {
+            PollManager.registerCommands()
+        }
+
+        if (config.getBoolean("modules.chatManagement"))
+        {
+            ChatManagmentHandler.registerCommands()
+        }
+
+        if (config.getBoolean("modules.gamemode"))
+        {
+            GamemodeCreativeCommand.registerCommand()
+            GamemodeSurvivalCommand.registerCommand()
+            GeneralGamemodeCommand.registerCommand()
+        }
+
+
+        if (config.getBoolean("modules.kits"))
+        {
+            KitCommands.registerCommands()
+        }
 
     }
 

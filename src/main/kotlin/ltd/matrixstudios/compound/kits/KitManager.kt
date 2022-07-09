@@ -72,7 +72,7 @@ object KitManager {
     {
         if (kit.contents != null)
         {
-            player.inventory.contents = kit.contents!!.contents
+            player.inventory.contents = kit.contents.contents
         }
 
         player.inventory.armorContents = kit.armor

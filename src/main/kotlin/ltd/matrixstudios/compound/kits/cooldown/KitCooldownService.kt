@@ -19,8 +19,8 @@ object KitCooldownService {
 
     fun isOnCoodown(kit: Kit, player: UUID) : Boolean
     {
-        val long = RedisManager.jedis.resource.use { it.hget("Compound::Kits::${kit.id}::Cooldowns::", player.toString()) }.toLong()
+        val long = RedisManager.jedis.resource.use { it.hget("Compound::Kits::${kit.id}::Cooldowns::", player.toString()) } ?: return false
 
-        return long.minus(System.currentTimeMillis()) > kit.getTimeInLong()
+        return long.toLong() >= System.currentTimeMillis()
     }
 }

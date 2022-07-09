@@ -51,7 +51,7 @@ class KitCommands {
 
                             KitManager.giveToPlayer(actualKit, sender)
 
-                            sender.sendMessage(Chat.format("&aApplied the &f$kit kit!"))
+                            sender.sendMessage(Chat.format("&aApplied the &f$kit &akit!"))
                         }
                     }
 
