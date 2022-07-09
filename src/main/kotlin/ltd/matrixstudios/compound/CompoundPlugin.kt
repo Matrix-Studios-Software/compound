@@ -79,7 +79,7 @@ class CompoundPlugin : JavaPlugin() {
             HelpCommands.registerAll()
         }
 
-        if (config.getBoolean("modules.reportsAndRequests"))
+        if (config.getBoolean("modules.messages"))
         {
             BasicMessageCommands.registerAll()
             MessagingExclusionCommands.registerAll()
@@ -101,7 +101,6 @@ class CompoundPlugin : JavaPlugin() {
             GamemodeSurvivalCommand.registerCommand()
             GeneralGamemodeCommand.registerCommand()
         }
-
 
         if (config.getBoolean("modules.kits"))
         {
