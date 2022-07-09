@@ -5,6 +5,7 @@ import ltd.matrixstudios.compound.colors.PluginColorization
 import ltd.matrixstudios.compound.commands.Command
 import ltd.matrixstudios.compound.kits.Kit
 import ltd.matrixstudios.compound.kits.KitManager
+import ltd.matrixstudios.compound.kits.cooldown.KitCooldownService
 import ltd.matrixstudios.compound.utility.time.TimeUtil
 import org.bukkit.Material
 import org.bukkit.entity.Player
@@ -42,7 +43,13 @@ class KitCommands {
 
                         if (actualKit.permission == "" || sender.hasPermission(actualKit.permission))
                         {
-                            KitManager.giveToPlayer(actualKit, sender as Player)
+                            if (KitCooldownService.isOnCoodown(actualKit, (sender as Player).uniqueId))
+                            {
+                                sender.sendMessage(Chat.format("&cYou are currently on kit cooldown!"))
+                                return@handle
+                            }
+
+                            KitManager.giveToPlayer(actualKit, sender)
 
                             sender.sendMessage(Chat.format("&aApplied the &f$kit kit!"))
                         }

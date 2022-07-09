@@ -21,6 +21,6 @@ object KitCooldownService {
     {
         val long = RedisManager.jedis.resource.use { it.hget("Compound::Kits::${kit.id}::Cooldowns::", player.toString()) }.toLong()
 
-        return long - System.currentTimeMillis() > kit.getTimeInLong()
+        return long.minus(System.currentTimeMillis()) > kit.getTimeInLong()
     }
 }
