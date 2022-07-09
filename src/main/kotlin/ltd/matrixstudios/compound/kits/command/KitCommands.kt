@@ -6,6 +6,7 @@ import ltd.matrixstudios.compound.commands.Command
 import ltd.matrixstudios.compound.kits.Kit
 import ltd.matrixstudios.compound.kits.KitManager
 import ltd.matrixstudios.compound.kits.cooldown.KitCooldownService
+import ltd.matrixstudios.compound.kits.menu.KitsMenu
 import ltd.matrixstudios.compound.utility.time.TimeUtil
 import org.bukkit.Material
 import org.bukkit.entity.Player
@@ -21,8 +22,7 @@ class KitCommands {
                 .execute().handle { args, sender, command ->
                     if (args.isEmpty())
                     {
-
-
+                        KitsMenu(sender as Player).openMenu()
                     } else if (args.size == 1)
                     {
                         val kit = args[0]
@@ -94,7 +94,7 @@ class KitCommands {
 
                             val player = sender as Player
 
-                            val kit = Kit(name, name, "1d", player.inventory.armorContents, player.inventory, Material.DIRT, "")
+                            val kit = Kit(name, name, "1d", player.inventory.armorContents, player.inventory, Material.DIRT, 0, mutableListOf(), "", 0)
 
                             KitManager.save(kit)
                             sender.sendMessage(Chat.format("&aCreated a kit with the name &f$name"))

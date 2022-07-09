@@ -35,14 +35,16 @@ object KitManager {
             val displayName = kitConfig.getString("kits.$name.displayName")
             val time = kitConfig.getString("kits.$name.cooldown")
             val material = Material.getMaterial(kitConfig.getString("kits.$name.material"))
+            val permission = kitConfig.getString("kits.$name.permission")
+            val slot = kitConfig.getInt("kits.$name.slot")
+            val description = kitConfig.getStringList("kits.$name.description")
+            val data = kitConfig.getInt("kits.$name.displayData")
 
             //contents
             val armor = InventoryUtils.toItemArray(kitConfig, "kits.$name.armor")
             val inventory = InventoryUtils.toInventory(kitConfig, "kits.$name.inventory")!!
 
-            val permission = kitConfig.getString("kits.$name.permission")
-
-            val finalKit = Kit(name, displayName, time, armor, inventory, material, permission)
+            val finalKit = Kit(name, displayName, time, armor, inventory, material, data.toShort(), description, permission, slot)
 
             kits[name] = finalKit
         }
@@ -60,6 +62,9 @@ object KitManager {
         kitconfig.set("kits.$name.cooldown", kit.cooldown)
         kitconfig.set("kits.$name.material", kit.displayItem.name)
         kitconfig.set("kits.$name.permission", kit.permission)
+        kitconfig.set("kits.$name.slot", kit.slot)
+        kitconfig.set("kits.$name.displayData", kit.displayData)
+        kitconfig.set("kits.$name.description", kit.description)
         InventoryUtils.saveItemArray(kit.armor, kitconfig, "kits.$name.armor")
         InventoryUtils.saveInventory(kit.contents, kitconfig, "kits.$name.inventory")
 
@@ -72,7 +77,7 @@ object KitManager {
     {
         if (kit.contents != null)
         {
-            player.inventory.contents = kit.contents.contents
+            player.inventory.contents = kit.contents!!.contents
         }
 
         player.inventory.armorContents = kit.armor

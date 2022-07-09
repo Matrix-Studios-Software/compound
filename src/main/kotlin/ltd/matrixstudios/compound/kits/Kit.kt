@@ -7,12 +7,15 @@ import org.bukkit.inventory.ItemStack
 
 data class Kit(
     val id: String,
-    val displayName: String,
-    val cooldown: String,
-    val armor: Array<ItemStack?>,
-    val contents: Inventory?,
-    val displayItem: Material,
-    val permission: String
+    var displayName: String,
+    var cooldown: String,
+    var armor: Array<ItemStack?>,
+    var contents: Inventory?,
+    var displayItem: Material,
+    var displayData: Short,
+    var description: MutableList<String>,
+    var permission: String,
+    var slot: Int
 ) {
 
     fun getTimeInLong() : Long

@@ -31,6 +31,9 @@ colors:
   primary: "&b"
   secondary: "&f"
 
+kits:
+  menuSize: 54 #Divisible by 9
+
 waypoints:
   spawn:
     x: 0
