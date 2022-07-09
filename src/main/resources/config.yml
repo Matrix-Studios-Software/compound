@@ -27,6 +27,10 @@ gamemode:
   creative: "&aYou have went into Creative mode!"
   survival: "&aYou have went into Survival mode!"
 
+colors:
+  primary: "&b"
+  secondary: "&f"
+
 waypoints:
   spawn:
     x: 0

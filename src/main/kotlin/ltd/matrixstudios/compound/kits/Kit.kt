@@ -11,7 +11,8 @@ data class Kit(
     val cooldown: String,
     val armor: Array<ItemStack?>,
     val contents: Inventory?,
-    val displayItem: Material
+    val displayItem: Material,
+    val permission: String
 ) {
 
     fun getTimeInLong() : Long

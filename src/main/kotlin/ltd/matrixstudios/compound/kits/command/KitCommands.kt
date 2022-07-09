@@ -1,6 +1,7 @@
 package ltd.matrixstudios.compound.kits.command
 
 import ltd.matrixstudios.compound.chat.Chat
+import ltd.matrixstudios.compound.colors.PluginColorization
 import ltd.matrixstudios.compound.commands.Command
 import ltd.matrixstudios.compound.kits.Kit
 import ltd.matrixstudios.compound.kits.KitManager
@@ -12,25 +13,56 @@ import java.util.concurrent.TimeUnit
 class KitCommands {
 
     companion object {
-        fun registerCommand()
+        fun registerCommands()
         {
             Command().create("kit")
                 .requirePlayer()
                 .execute().handle { args, sender, command ->
-                    if (!sender.hasPermission("compound.kits.details"))
+                    if (args.isEmpty())
                     {
 
-                        return@handle
+
+                    } else if (args.size == 1)
+                    {
+                        val kit = args[0]
+
+                        val actualKit = KitManager.getKit(kit)
+
+                        if (actualKit == null)
+                        {
+                            sender.sendMessage(Chat.format("&cKit does not exist!"))
+                            return@handle
+                        }
+
+                        if (actualKit.permission != "" && !sender.hasPermission(actualKit.permission))
+                        {
+                            sender.sendMessage(Chat.format("&cYou do not have access to this kit!"))
+                            return@handle
+                        }
+
+                        if (actualKit.permission == "" || sender.hasPermission(actualKit.permission))
+                        {
+                            KitManager.giveToPlayer(actualKit, sender as Player)
+
+                            sender.sendMessage(Chat.format("&aApplied the &f$kit kit!"))
+                        }
                     }
 
+                }.bindToPlugin()
+
+            Command().create("kitadmin")
+                .requirePlayer()
+                .execute().handle { args, sender, command ->
                     if (sender.hasPermission("compound.kits.details") && args.isEmpty())
                     {
-                        sender.sendMessage(Chat.format("&b=== &fDetailed Kit Help &b==="))
-                        sender.sendMessage(Chat.format("&f/kit create <kit> - &bCreates a kit"))
-                        sender.sendMessage(Chat.format("&f/kit delete <kit> - &bDeletes a kit"))
-                        sender.sendMessage(Chat.format("&f/kit edit <kit> - &bOpens the kit edit menu"))
-                        sender.sendMessage(Chat.format("&f/kit menu - &bOpens the default menu"))
-                        sender.sendMessage(Chat.format("&b=== &fShowing &b4 &fresults. &b==="))
+                        sender.sendMessage(Chat.format("${PluginColorization.PRIMARY_COLOR}=== ${PluginColorization.SECONDARY_COLOR}Detailed Kit Help ${PluginColorization.PRIMARY_COLOR}==="))
+
+                        sender.sendMessage(Chat.format("${PluginColorization.SECONDARY_COLOR}/kit create <kit> - ${PluginColorization.PRIMARY_COLOR}Creates a kit"))
+                        sender.sendMessage(Chat.format("${PluginColorization.SECONDARY_COLOR}/kit delete <kit> - ${PluginColorization.PRIMARY_COLOR}Deletes a kit"))
+                        sender.sendMessage(Chat.format("${PluginColorization.SECONDARY_COLOR}/kit edit <kit> - ${PluginColorization.PRIMARY_COLOR}Opens the kit edit menu"))
+                        sender.sendMessage(Chat.format("${PluginColorization.SECONDARY_COLOR}/kit menu - ${PluginColorization.PRIMARY_COLOR}Opens the default menu"))
+
+                        sender.sendMessage(Chat.format("${PluginColorization.PRIMARY_COLOR}=== ${PluginColorization.SECONDARY_COLOR}Showing ${PluginColorization.PRIMARY_COLOR}4 ${PluginColorization.SECONDARY_COLOR}results. ${PluginColorization.PRIMARY_COLOR}==="))
 
                         return@handle
                     }
@@ -55,7 +87,7 @@ class KitCommands {
 
                             val player = sender as Player
 
-                            val kit = Kit(name, name, "1d", player.inventory.armorContents, player.inventory, Material.DIRT)
+                            val kit = Kit(name, name, "1d", player.inventory.armorContents, player.inventory, Material.DIRT, "")
 
                             KitManager.save(kit)
                             sender.sendMessage(Chat.format("&aCreated a kit with the name &f$name"))

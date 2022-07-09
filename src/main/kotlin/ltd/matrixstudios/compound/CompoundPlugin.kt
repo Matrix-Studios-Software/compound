@@ -79,7 +79,7 @@ class CompoundPlugin : JavaPlugin() {
         GamemodeSurvivalCommand.registerCommand()
         GeneralGamemodeCommand.registerCommand()
 
-        KitCommands.registerCommand()
+        KitCommands.registerCommands()
 
     }
 

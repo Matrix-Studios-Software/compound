@@ -3,8 +3,11 @@ package ltd.matrixstudios.compound.kits
 import ltd.matrixstudios.compound.CompoundPlugin
 import ltd.matrixstudios.compound.utility.files.FileConfiguration
 import ltd.matrixstudios.compound.inventory.InventoryUtils
+import ltd.matrixstudios.compound.kits.cooldown.KitCooldownService
 import ltd.matrixstudios.compound.utility.time.TimeUtil
 import org.bukkit.Material
+import org.bukkit.entity.Player
+import org.bukkit.inventory.PlayerInventory
 import java.util.concurrent.TimeUnit
 
 object KitManager {
@@ -37,7 +40,9 @@ object KitManager {
             val armor = InventoryUtils.toItemArray(kitConfig, "kits.$name.armor")
             val inventory = InventoryUtils.toInventory(kitConfig, "kits.$name.inventory")!!
 
-            val finalKit = Kit(name, displayName, time, armor, inventory, material)
+            val permission = kitConfig.getString("kits.$name.permission")
+
+            val finalKit = Kit(name, displayName, time, armor, inventory, material, permission)
 
             kits[name] = finalKit
         }
@@ -54,11 +59,25 @@ object KitManager {
         kitconfig.set("kits.$name.displayName", kit.displayName)
         kitconfig.set("kits.$name.cooldown", kit.cooldown)
         kitconfig.set("kits.$name.material", kit.displayItem.name)
+        kitconfig.set("kits.$name.permission", kit.permission)
         InventoryUtils.saveItemArray(kit.armor, kitconfig, "kits.$name.armor")
         InventoryUtils.saveInventory(kit.contents, kitconfig, "kits.$name.inventory")
 
         config.save()
         kits[name] = kit
+    }
+
+
+    fun giveToPlayer(kit: Kit, player: Player)
+    {
+        if (kit.contents != null)
+        {
+            player.inventory.contents = kit.contents!!.contents
+        }
+
+        player.inventory.armorContents = kit.armor
+
+        KitCooldownService.addCooldown(kit.id, player.uniqueId, System.currentTimeMillis().plus(kit.getTimeInLong()))
     }
 
     fun getKit(name: String) : Kit?
