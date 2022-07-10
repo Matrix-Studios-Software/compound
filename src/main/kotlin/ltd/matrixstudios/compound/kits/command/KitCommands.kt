@@ -70,7 +70,7 @@ class KitCommands {
                         sender.sendMessage(Chat.format("${PluginColorization.SECONDARY_COLOR}/kit setitem <kit> <material> - ${PluginColorization.PRIMARY_COLOR}Sets the display item of a kit"))
                         sender.sendMessage(Chat.format("${PluginColorization.SECONDARY_COLOR}/kit menu - ${PluginColorization.PRIMARY_COLOR}Opens the default menu"))
                         sender.sendMessage(Chat.format("${PluginColorization.SECONDARY_COLOR}/kit setdisplayname <kit> <name> - ${PluginColorization.PRIMARY_COLOR}Sets the display name of a kit"))
-                        sender.sendMessage(Chat.format("${PluginColorization.PRIMARY_COLOR}=== ${PluginColorization.SECONDARY_COLOR}Showing ${PluginColorization.PRIMARY_COLOR}4 ${PluginColorization.SECONDARY_COLOR}results. ${PluginColorization.PRIMARY_COLOR}==="))
+                        sender.sendMessage(Chat.format("${PluginColorization.PRIMARY_COLOR}=== ${PluginColorization.SECONDARY_COLOR}Showing ${PluginColorization.PRIMARY_COLOR}5 ${PluginColorization.SECONDARY_COLOR}results. ${PluginColorization.PRIMARY_COLOR}==="))
 
                         return@handle
                     }
