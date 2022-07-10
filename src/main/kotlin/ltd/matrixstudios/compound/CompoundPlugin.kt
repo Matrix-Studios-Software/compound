@@ -8,7 +8,6 @@ import ltd.matrixstudios.compound.commands.Command
 import ltd.matrixstudios.compound.commands.bukkit.BukkitCommandFunctions
 import ltd.matrixstudios.compound.kits.KitManager
 import ltd.matrixstudios.compound.kits.command.KitCommands
-import ltd.matrixstudios.compound.lunar.LunarWaypointManager
 import ltd.matrixstudios.compound.staff.StaffSuiteManager
 import ltd.matrixstudios.compound.staff.commands.BasicStaffCommands
 import ltd.matrixstudios.compound.staff.listeners.FrozenPlayerListener
@@ -41,8 +40,10 @@ class CompoundPlugin : JavaPlugin() {
         BukkitCommandFunctions.useCommandMap()
         loadRedis()
         staffManager = StaffSuiteManager()
-        //LunarWaypointManager.loadWaypoints()
-        KitManager.loadKits()
+        if (config.getBoolean("modules.kits"))
+        {
+            KitManager.loadKits()
+        }
 
         registerCommands()
         registerListeners()

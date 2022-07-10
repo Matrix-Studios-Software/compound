@@ -95,7 +95,7 @@ class KitCommands {
 
                             val player = sender as Player
 
-                            val kit = Kit(name, name, "1d", player.inventory.armorContents, player.inventory, Material.DIRT, 0, mutableListOf(), "", 0)
+                            val kit = Kit(name.toLowerCase(), name, "1d", player.inventory.armorContents, player.inventory, Material.DIRT, 0, mutableListOf(), "", 0)
 
                             KitManager.save(kit)
                             sender.sendMessage(Chat.format("&aCreated a kit with the name &f$name"))

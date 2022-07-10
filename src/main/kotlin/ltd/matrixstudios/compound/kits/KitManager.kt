@@ -87,6 +87,6 @@ object KitManager {
 
     fun getKit(name: String) : Kit?
     {
-        return kits[name]
+        return kits[name.toLowerCase()]
     }
 }
