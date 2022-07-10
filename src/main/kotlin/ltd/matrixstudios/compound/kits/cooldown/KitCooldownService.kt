@@ -17,6 +17,13 @@ object KitCooldownService {
         }
     }
 
+    fun getCooldown(kit: Kit, player: UUID) : Long?
+    {
+        val long = RedisManager.jedis.resource.use { it.hget("Compound::Kits::${kit.id}::Cooldowns::", player.toString()) } ?: return null
+
+        return long.toLong()
+    }
+
     fun isOnCoodown(kit: Kit, player: UUID) : Boolean
     {
         val long = RedisManager.jedis.resource.use { it.hget("Compound::Kits::${kit.id}::Cooldowns::", player.toString()) } ?: return false

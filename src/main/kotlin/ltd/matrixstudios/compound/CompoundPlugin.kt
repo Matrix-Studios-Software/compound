@@ -41,7 +41,7 @@ class CompoundPlugin : JavaPlugin() {
         BukkitCommandFunctions.useCommandMap()
         loadRedis()
         staffManager = StaffSuiteManager()
-        LunarWaypointManager.loadWaypoints()
+        //LunarWaypointManager.loadWaypoints()
         KitManager.loadKits()
 
         registerCommands()

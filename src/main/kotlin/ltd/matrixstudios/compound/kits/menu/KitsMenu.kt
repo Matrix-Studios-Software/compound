@@ -8,6 +8,7 @@ import ltd.matrixstudios.compound.kits.cooldown.KitCooldownService
 import ltd.matrixstudios.compound.menu.Button
 import ltd.matrixstudios.compound.menu.Menu
 import ltd.matrixstudios.compound.menu.buttons.SimpleActionButton
+import ltd.matrixstudios.compound.utility.time.TimeUtil
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.ClickType
@@ -36,7 +37,15 @@ class KitsMenu(val player: Player): Menu(CompoundPlugin.instance.config.getInt("
         }
 
         override fun getDescription(player: Player): MutableList<String>? {
-            return kit.description
+            val desc = kit.description.toCollection(mutableListOf())
+            desc.add(" ")
+            if (KitCooldownService.isOnCoodown(kit, player.uniqueId))
+            {
+                desc.add(Chat.format("&cYou are currently on colodown!"))
+                desc.add(Chat.format("&cRemaining: &f" + TimeUtil.formatDuration(KitCooldownService.getCooldown(kit, player.uniqueId)!!.minus(System.currentTimeMillis()))))
+            }
+
+            return desc
         }
 
         override fun getDisplayName(player: Player): String? {
