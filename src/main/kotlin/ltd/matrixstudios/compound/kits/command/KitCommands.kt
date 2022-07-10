@@ -3,6 +3,7 @@ package ltd.matrixstudios.compound.kits.command
 import ltd.matrixstudios.compound.chat.Chat
 import ltd.matrixstudios.compound.colors.PluginColorization
 import ltd.matrixstudios.compound.commands.Command
+import ltd.matrixstudios.compound.commands.bukkit.BukkitCommandFunctions
 import ltd.matrixstudios.compound.kits.Kit
 import ltd.matrixstudios.compound.kits.KitManager
 import ltd.matrixstudios.compound.kits.cooldown.KitCooldownService
@@ -66,9 +67,9 @@ class KitCommands {
 
                         sender.sendMessage(Chat.format("${PluginColorization.SECONDARY_COLOR}/kit create <kit> - ${PluginColorization.PRIMARY_COLOR}Creates a kit"))
                         sender.sendMessage(Chat.format("${PluginColorization.SECONDARY_COLOR}/kit delete <kit> - ${PluginColorization.PRIMARY_COLOR}Deletes a kit"))
-                        sender.sendMessage(Chat.format("${PluginColorization.SECONDARY_COLOR}/kit edit <kit> - ${PluginColorization.PRIMARY_COLOR}Opens the kit edit menu"))
+                        sender.sendMessage(Chat.format("${PluginColorization.SECONDARY_COLOR}/kit setitem <kit> <material> - ${PluginColorization.PRIMARY_COLOR}Sets the display item of a kit"))
                         sender.sendMessage(Chat.format("${PluginColorization.SECONDARY_COLOR}/kit menu - ${PluginColorization.PRIMARY_COLOR}Opens the default menu"))
-
+                        sender.sendMessage(Chat.format("${PluginColorization.SECONDARY_COLOR}/kit setdisplayname <kit> <name> - ${PluginColorization.PRIMARY_COLOR}Sets the display name of a kit"))
                         sender.sendMessage(Chat.format("${PluginColorization.PRIMARY_COLOR}=== ${PluginColorization.SECONDARY_COLOR}Showing ${PluginColorization.PRIMARY_COLOR}4 ${PluginColorization.SECONDARY_COLOR}results. ${PluginColorization.PRIMARY_COLOR}==="))
 
                         return@handle
@@ -98,6 +99,58 @@ class KitCommands {
 
                             KitManager.save(kit)
                             sender.sendMessage(Chat.format("&aCreated a kit with the name &f$name"))
+                        }
+
+                        "setitem" -> {
+                            if (args.size != 3)
+                            {
+                                sender.sendMessage(Chat.format("&cUsage: /kit setitem <item>"))
+                                return@handle
+                            }
+
+                            if (KitManager.getKit(args[1]) == null)
+                            {
+                                sender.sendMessage(Chat.format("&cThis kit doesnt exists"))
+                                return@handle
+                            }
+
+                            val item = args[2].toUpperCase()
+
+                            val material = Material.getMaterial(item)
+
+                            if (material == null)
+                            {
+                                sender.sendMessage(Chat.format("&cInvalid material"))
+                                return@handle
+                            }
+
+                            val kit = KitManager.getKit(args[1])
+
+                            kit!!.displayItem = material
+                            KitManager.save(kit)
+                            sender.sendMessage(Chat.format("&aSet the display item of the kit &f${args[1]}"))
+                        }
+
+                        "setdisplayname" -> {
+                            if (args.size < 3)
+                            {
+                                sender.sendMessage(Chat.format("&cUsage: /kit setdisplayname <kit> <name>"))
+                                return@handle
+                            }
+
+                            if (KitManager.getKit(args[1]) == null)
+                            {
+                                sender.sendMessage(Chat.format("&cThis kit doesnt exists"))
+                                return@handle
+                            }
+
+                            val name = BukkitCommandFunctions.constructStringBuilder(args, 2)
+
+                            val kit = KitManager.getKit(args[1])
+
+                            kit!!.displayName = name.toString()
+                            KitManager.save(kit)
+                            sender.sendMessage(Chat.format("&aSet the display name of the kit &f${args[1]}"))
                         }
                     }
                 }.bindToPlugin()
