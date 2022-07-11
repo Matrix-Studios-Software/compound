@@ -1,5 +1,6 @@
 package ltd.matrixstudios.compound.staff.help
 
+import ltd.matrixstudios.compound.CompoundPlugin
 import ltd.matrixstudios.compound.chat.Chat
 import ltd.matrixstudios.compound.commands.Command
 import ltd.matrixstudios.compound.commands.bukkit.BukkitCommandFunctions
@@ -49,7 +50,19 @@ class HelpCommands {
                         return@handle
                     }
 
-                    RedisManager.send(ReportPacket(target.displayName, finalArgs.toString(), sender.displayName))
+                    if (CompoundPlugin.instance.config.getBoolean("modules.useRedis"))
+                    {
+                        RedisManager.send(ReportPacket(target.displayName, finalArgs.toString(), sender.displayName))
+                    } else {
+                        Bukkit.getOnlinePlayers().filter { it.hasPermission("compound.staff") }.forEach {
+                            val message = CompoundPlugin.instance.config.getString("report.message")
+                                .replace("%target%", Chat.format(target.displayName))
+                                .replace("%reason%", finalArgs.toString())
+                                .replace("%reporter%", Chat.format(sender.displayName))
+
+                            it.sendMessage(Chat.format(message))
+                        }
+                    }
 
                     Cooldowns.addCooldown("report", sender.uniqueId, TimeUnit.MINUTES.toMillis(1))
 

@@ -12,6 +12,7 @@ import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
 import org.bukkit.event.entity.EntityInteractEvent
+import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.player.PlayerInteractEntityEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.metadata.FixedMetadataValue
@@ -50,7 +51,7 @@ class StaffmodeFunctionalityListener : Listener {
 
 
                     player.teleport(actualPlayer)
-                    player.sendMessage(Chat.format("&6Teleporting&f..."))
+                    player.sendMessage(Chat.format("&6Teleporting..."))
                 }
 
                 if (itemInHand.isSimilar(StaffItems.VANISH))
@@ -75,6 +76,42 @@ class StaffmodeFunctionalityListener : Listener {
                 {
                     e.isCancelled = true
                     StaffOnlineMenu(player).updateMenu()
+                }
+
+                if (itemInHand.isSimilar(StaffItems.INVENTORY_INSPECT))
+                {
+                    e.isCancelled = true
+                }
+
+                if (itemInHand.isSimilar(StaffItems.FREEZE))
+                {
+                    e.isCancelled = true
+                }
+            }
+        }
+    }
+
+    @EventHandler
+    fun interactWithEntity(e: PlayerInteractEntityEvent)
+    {
+        val player = e.player
+
+        if (CompoundPlugin.instance.staffManager.isModMode(player))
+        {
+            val itemInHand = player.itemInHand
+
+            if (e.rightClicked is Player)
+            {
+                if (itemInHand.isSimilar(StaffItems.INVENTORY_INSPECT))
+                {
+                    player.performCommand("invsee ${e.rightClicked.name}")
+                    e.isCancelled = true
+                }
+
+                if (itemInHand.isSimilar(StaffItems.FREEZE))
+                {
+                    player.performCommand("freeze ${e.rightClicked.name}")
+                    e.isCancelled = true
                 }
             }
         }

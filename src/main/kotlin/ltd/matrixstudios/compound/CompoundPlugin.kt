@@ -22,6 +22,7 @@ import ltd.matrixstudios.compound.player.gamemode.GamemodeCreativeCommand
 import ltd.matrixstudios.compound.player.gamemode.GamemodeSurvivalCommand
 import ltd.matrixstudios.compound.player.gamemode.GeneralGamemodeCommand
 import ltd.matrixstudios.compound.staff.help.HelpCommands
+import org.bukkit.Bukkit
 import org.bukkit.command.defaults.HelpCommand
 import org.bukkit.plugin.java.JavaPlugin
 
@@ -40,6 +41,7 @@ class CompoundPlugin : JavaPlugin() {
         BukkitCommandFunctions.useCommandMap()
         loadRedis()
         staffManager = StaffSuiteManager()
+
         if (config.getBoolean("modules.kits"))
         {
             KitManager.loadKits()
@@ -62,7 +64,11 @@ class CompoundPlugin : JavaPlugin() {
 
         server.pluginManager.registerEvents(MenuListener(), this)
 
-        server.pluginManager.registerEvents(SlowChatListener(), this)
+        if (config.getBoolean("slowchat.enable"))
+        {
+            server.pluginManager.registerEvents(SlowChatListener(), this)
+        }
+
         server.pluginManager.registerEvents(MuteChatListener(), this)
 
     }
@@ -108,6 +114,16 @@ class CompoundPlugin : JavaPlugin() {
             KitCommands.registerCommands()
         }
 
+    }
+
+    override fun onDisable() {
+        for (player in Bukkit.getOnlinePlayers())
+        {
+            if (staffManager.isModMode(player))
+            {
+                staffManager.removeStaffMode(player)
+            }
+        }
     }
 
 

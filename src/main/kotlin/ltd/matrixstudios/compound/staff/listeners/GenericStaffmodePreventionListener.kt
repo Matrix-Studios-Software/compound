@@ -7,7 +7,10 @@ import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.block.BlockPlaceEvent
 import org.bukkit.event.entity.EntityDamageByEntityEvent
+import org.bukkit.event.entity.EntityDamageEvent
+import org.bukkit.event.player.PlayerDropItemEvent
 import org.bukkit.event.player.PlayerInteractEvent
+import org.bukkit.event.player.PlayerQuitEvent
 
 class GenericStaffmodePreventionListener : Listener {
 
@@ -54,8 +57,8 @@ class GenericStaffmodePreventionListener : Listener {
     }
 
     @EventHandler
-    fun damage(e: EntityDamageByEntityEvent) {
-        val player = e.damager
+    fun damage(e: EntityDamageEvent) {
+        val player = e.entity
 
         if (player is Player)
         {
@@ -68,7 +71,26 @@ class GenericStaffmodePreventionListener : Listener {
     }
 
     @EventHandler
-    fun damage2(e: EntityDamageByEntityEvent) {
+    fun drop(e: PlayerDropItemEvent)
+    {
+        if (!e.player.hasPermission("compound.staffmode.edit"))
+        {
+            e.isCancelled = true
+        }
+    }
+
+    @EventHandler
+    fun playerQuit(e: PlayerQuitEvent)
+    {
+        if (CompoundPlugin.instance.staffManager.isModMode(e.player))
+        {
+            CompoundPlugin.instance.staffManager.removeStaffMode(e.player)
+        }
+    }
+
+
+    @EventHandler
+    fun damagedBy(e: EntityDamageByEntityEvent) {
         val player = e.entity
         val damager = e.damager
 
@@ -76,6 +98,21 @@ class GenericStaffmodePreventionListener : Listener {
         {
 
             if (CompoundPlugin.instance.staffManager.isModMode(player))
+            {
+                e.isCancelled = true
+            }
+        }
+    }
+
+    @EventHandler
+    fun damagedFrom(e: EntityDamageByEntityEvent) {
+        val player = e.entity
+        val damager = e.damager
+
+        if (player is Player && damager is Player)
+        {
+
+            if (CompoundPlugin.instance.staffManager.isModMode(damager))
             {
                 e.isCancelled = true
             }
