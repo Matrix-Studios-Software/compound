@@ -8,6 +8,7 @@ import ltd.matrixstudios.compound.misc.polls.menu.PollMenu
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.scheduler.BukkitRunnable
+import org.omg.PortableInterceptor.ACTIVE
 import java.nio.channels.InterruptedByTimeoutException
 import java.util.*
 
@@ -44,31 +45,39 @@ object PollManager {
 
     fun closePoll()
     {
-        val poll = activePoll!!
 
-        val optOneVotes = poll.totalVotes.values.filter { it == poll.optionOne }.size
-        val optTwoVotes = poll.totalVotes.values.filter { it == poll.optionTwo }.size
-
-        val message = Chat.format(CompoundPlugin.instance.config.getString("polls.endMessage"))
-
-        if (optOneVotes > optTwoVotes)
+        if (activePoll != null)
         {
-            Bukkit.broadcastMessage(message.replace("%entry%", poll.optionOne))
+            val poll = activePoll!!
 
-            activePoll = null
-        } else if (optTwoVotes > optOneVotes)
-        {
-            Bukkit.broadcastMessage(message.replace("%entry%", poll.optionTwo))
 
-            activePoll = null
-        } else if (optOneVotes == optTwoVotes)
-        {
-            val random = listOf(poll.optionOne, poll.optionTwo).shuffled()[0]
 
-            Bukkit.broadcastMessage(message.replace("%entry%", random))
+            val optOneVotes = poll.totalVotes.values.filter { it == poll.optionOne }.size
+            val optTwoVotes = poll.totalVotes.values.filter { it == poll.optionTwo }.size
 
-            activePoll = null
+            val message = Chat.format(CompoundPlugin.instance.config.getString("polls.endMessage"))
+
+            if (optOneVotes > optTwoVotes)
+            {
+                Bukkit.broadcastMessage(message.replace("%entry%", poll.optionOne))
+
+                activePoll = null
+            } else if (optTwoVotes > optOneVotes)
+            {
+                Bukkit.broadcastMessage(message.replace("%entry%", poll.optionTwo))
+
+                activePoll = null
+            } else if (optOneVotes == optTwoVotes)
+            {
+                val random = listOf(poll.optionOne, poll.optionTwo).shuffled()[0]
+
+                Bukkit.broadcastMessage(message.replace("%entry%", random))
+
+                activePoll = null
+            }
         }
+
+        activePoll == null
     }
 
     fun getVotesForPoll(option: String) : Int

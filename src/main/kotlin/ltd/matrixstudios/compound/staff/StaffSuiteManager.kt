@@ -2,6 +2,7 @@ package ltd.matrixstudios.compound.staff
 
 import ltd.matrixstudios.compound.CompoundPlugin
 import org.bukkit.GameMode
+import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import org.bukkit.metadata.FixedMetadataValue
@@ -53,6 +54,8 @@ class StaffSuiteManager {
 
     fun setStaffMode(player: Player)
     {
+        player.inventory.clear()
+        player.inventory.armorContents = null
         player.gameMode = GameMode.CREATIVE
         player.health = 20.0
 
