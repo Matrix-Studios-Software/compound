@@ -60,8 +60,9 @@ class KitCommands {
 
             Command().create("kitadmin")
                 .requirePlayer()
+                .permission("compound.kits.details")
                 .execute().handle { args, sender, command ->
-                    if (sender.hasPermission("compound.kits.details") && args.isEmpty())
+                    if (args.isEmpty())
                     {
                         sender.sendMessage(Chat.format("${PluginColorization.PRIMARY_COLOR}=== ${PluginColorization.SECONDARY_COLOR}Detailed Kit Help ${PluginColorization.PRIMARY_COLOR}==="))
 
@@ -151,7 +152,11 @@ class KitCommands {
                             kit!!.displayName = name.toString()
                             KitManager.save(kit)
                             sender.sendMessage(Chat.format("&aSet the display name of the kit &f${args[1]}"))
+                        } else -> {
+                            sender.sendMessage(Chat.format("&cNot a param option."))
                         }
+
+
                     }
                 }.bindToPlugin()
         }
