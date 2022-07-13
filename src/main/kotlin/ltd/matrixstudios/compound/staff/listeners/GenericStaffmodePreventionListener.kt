@@ -72,20 +72,26 @@ class GenericStaffmodePreventionListener : Listener {
     }
 
     @EventHandler
-    fun pickup(e: PlayerPickupItemEvent)
-    {
-        if (!e.player.hasPermission("compound.staffmode.edit"))
+    fun pickup(e: PlayerPickupItemEvent) {
+        if (CompoundPlugin.instance.staffManager.isModMode(e.player))
         {
-            e.isCancelled = true
+            if (!e.player.hasPermission("compound.staffmode.edit"))
+                {
+
+                e.isCancelled = true
+            }
         }
     }
 
     @EventHandler
     fun drop(e: PlayerDropItemEvent)
     {
-        if (!e.player.hasPermission("compound.staffmode.edit"))
+        if (CompoundPlugin.instance.staffManager.isModMode(e.player))
         {
-            e.isCancelled = true
+            if (!e.player.hasPermission("compound.staffmode.edit"))
+            {
+                e.isCancelled = true
+            }
         }
     }
 

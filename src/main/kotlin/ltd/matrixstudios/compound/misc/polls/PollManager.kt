@@ -8,7 +8,6 @@ import ltd.matrixstudios.compound.misc.polls.menu.PollMenu
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.scheduler.BukkitRunnable
-import org.omg.PortableInterceptor.ACTIVE
 import java.nio.channels.InterruptedByTimeoutException
 import java.util.*
 
