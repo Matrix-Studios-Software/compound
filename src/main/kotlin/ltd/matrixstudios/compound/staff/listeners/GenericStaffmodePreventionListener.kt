@@ -10,6 +10,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.event.player.PlayerDropItemEvent
 import org.bukkit.event.player.PlayerInteractEvent
+import org.bukkit.event.player.PlayerPickupItemEvent
 import org.bukkit.event.player.PlayerQuitEvent
 
 class GenericStaffmodePreventionListener : Listener {
@@ -67,6 +68,15 @@ class GenericStaffmodePreventionListener : Listener {
             {
                 e.isCancelled = true
             }
+        }
+    }
+
+    @EventHandler
+    fun pickup(e: PlayerPickupItemEvent)
+    {
+        if (!e.player.hasPermission("compound.staffmode.edit"))
+        {
+            e.isCancelled = true
         }
     }
 
