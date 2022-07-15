@@ -39,7 +39,11 @@ class CompoundPlugin : JavaPlugin() {
         instance = this
 
         BukkitCommandFunctions.useCommandMap()
-        loadRedis()
+        if (config.getBoolean("modules.useRedis"))
+        {
+            loadRedis()
+        }
+
         staffManager = StaffSuiteManager()
 
         if (config.getBoolean("modules.kits"))

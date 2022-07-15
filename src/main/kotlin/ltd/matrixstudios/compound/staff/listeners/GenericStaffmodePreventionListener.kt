@@ -76,7 +76,7 @@ class GenericStaffmodePreventionListener : Listener {
         if (CompoundPlugin.instance.staffManager.isModMode(e.player))
         {
             if (!e.player.hasPermission("compound.staffmode.edit"))
-                {
+            {
 
                 e.isCancelled = true
             }
