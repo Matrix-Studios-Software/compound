@@ -54,14 +54,15 @@ class StaffSuiteManager {
 
     fun setStaffMode(player: Player)
     {
-        player.inventory.clear()
-        player.inventory.armorContents = null
         player.gameMode = GameMode.CREATIVE
         player.health = 20.0
 
         modInventories[player.uniqueId] = player.inventory.contents
         modArmor[player.uniqueId] = player.inventory.armorContents
         modModePlayers.add(player.uniqueId)
+
+        player.inventory.clear()
+        player.inventory.armorContents = null
 
         player.inventory.setItem(0, StaffItems.COMPASS)
         player.inventory.setItem(1, StaffItems.INVENTORY_INSPECT)
