@@ -1,6 +1,7 @@
 package ltd.matrixstudios.compound.staff.listeners
 
 import ltd.matrixstudios.compound.chat.Chat
+import org.bukkit.Location
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
@@ -16,7 +17,15 @@ class FrozenPlayerListener : Listener {
 
         if (player.hasMetadata("frozen"))
         {
-            e.isCancelled = true
+            val from: Location = e.from
+            val to: Location = e.to
+            if (from.x != to.x || e.from.z != e.to.z)
+            {
+                val newLocation: Location = from.block.location.add(0.5, 0.0, 0.5)
+                newLocation.pitch = to.pitch
+                newLocation.yaw = to.yaw
+                e.to = newLocation
+            }
         }
     }
 
