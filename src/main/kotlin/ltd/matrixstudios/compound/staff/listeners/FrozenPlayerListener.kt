@@ -46,4 +46,20 @@ class FrozenPlayerListener : Listener {
             }
         }
     }
+
+    @EventHandler
+    fun damageEntity(e: EntityDamageByEntityEvent)
+    {
+        val entity = e.damager
+
+        if (entity is Player)
+        {
+            if (entity.hasMetadata("frozen"))
+            {
+                entity.sendMessage(Chat.format("&cYou are currently frozen"))
+
+                e.isCancelled = true
+            }
+        }
+    }
 }
