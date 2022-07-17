@@ -18,7 +18,7 @@ class StaffUpdateVisibilityTask : BukkitRunnable() {
             if (online.hasPermission("compound.staff")) {
                 continue
             }
-            vanished.forEach(Consumer { player: Player? -> online.hidePlayer(player) })
+            vanished.forEach{ online.hidePlayer(it) }
         }
     }
 }
