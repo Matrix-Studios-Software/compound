@@ -21,6 +21,7 @@ import ltd.matrixstudios.compound.packet.RedisManager
 import ltd.matrixstudios.compound.player.gamemode.GamemodeCreativeCommand
 import ltd.matrixstudios.compound.player.gamemode.GamemodeSurvivalCommand
 import ltd.matrixstudios.compound.player.gamemode.GeneralGamemodeCommand
+import ltd.matrixstudios.compound.staff.StaffUpdateVisibilityTask
 import ltd.matrixstudios.compound.staff.help.HelpCommands
 import org.bukkit.Bukkit
 import org.bukkit.command.defaults.HelpCommand
@@ -83,6 +84,8 @@ class CompoundPlugin : JavaPlugin() {
         if (config.getBoolean("modules.staffSuite"))
         {
             BasicStaffCommands.registerAll()
+
+            (StaffUpdateVisibilityTask()).runTaskTimer(this, 20L, 20L)
         }
 
         if (config.getBoolean("modules.reportsAndRequests"))
