@@ -105,7 +105,7 @@ class KitCommands {
                         }
 
                         "resetcooldown" -> {
-                            if (args.size != 4)
+                            if (args.size != 3)
                             {
                                 sender.sendMessage(Chat.format("&cUsage: /kit resetcooldown <kit> <target>"))
                                 return@handle
