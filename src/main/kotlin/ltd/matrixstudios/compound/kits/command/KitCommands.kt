@@ -9,6 +9,7 @@ import ltd.matrixstudios.compound.kits.KitManager
 import ltd.matrixstudios.compound.kits.cooldown.KitCooldownService
 import ltd.matrixstudios.compound.kits.menu.KitsMenu
 import ltd.matrixstudios.compound.utility.time.TimeUtil
+import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import java.util.concurrent.TimeUnit
@@ -71,6 +72,7 @@ class KitCommands {
                         sender.sendMessage(Chat.format("${PluginColorization.SECONDARY_COLOR}/kit setitem <kit> <material> - ${PluginColorization.PRIMARY_COLOR}Sets the display item of a kit"))
                         sender.sendMessage(Chat.format("${PluginColorization.SECONDARY_COLOR}/kit menu - ${PluginColorization.PRIMARY_COLOR}Opens the default menu"))
                         sender.sendMessage(Chat.format("${PluginColorization.SECONDARY_COLOR}/kit setdisplayname <kit> <name> - ${PluginColorization.PRIMARY_COLOR}Sets the display name of a kit"))
+                        sender.sendMessage(Chat.format("${PluginColorization.SECONDARY_COLOR}/kit resetcooldown <kit> <player> - ${PluginColorization.PRIMARY_COLOR}Sets the display name of a kit"))
                         sender.sendMessage(Chat.format("${PluginColorization.PRIMARY_COLOR}=== ${PluginColorization.SECONDARY_COLOR}Showing ${PluginColorization.PRIMARY_COLOR}5 ${PluginColorization.SECONDARY_COLOR}results. ${PluginColorization.PRIMARY_COLOR}==="))
 
                         return@handle
@@ -100,6 +102,33 @@ class KitCommands {
 
                             KitManager.save(kit)
                             sender.sendMessage(Chat.format("&aCreated a kit with the name &f$name"))
+                        }
+
+                        "resetcooldown" -> {
+                            if (args.size != 4)
+                            {
+                                sender.sendMessage(Chat.format("&cUsage: /kit resetcooldown <kit> <target>"))
+                                return@handle
+                            }
+
+                            if (KitManager.getKit(args[1]) == null)
+                            {
+                                sender.sendMessage(Chat.format("&cThis kit doesnt exist"))
+                                return@handle
+                            }
+
+                            val kit = KitManager.getKit(args[1])!!
+
+                            val player = Bukkit.getPlayer(args[2])
+
+                            if (player == null || !player.isOnline)
+                            {
+                                player.sendMessage(Chat.format("&cPlayer is not online!"))
+                                return@handle
+                            }
+
+                            KitCooldownService.removeCooldown(kit.id, player.uniqueId)
+                            player.sendMessage(Chat.format("&aReset kit cooldown"))
                         }
 
                         "setitem" -> {

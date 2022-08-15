@@ -6,6 +6,17 @@ import java.util.UUID
 
 object KitCooldownService {
 
+    fun removeCooldown(kitName: String, uuid: UUID)
+    {
+        RedisManager.jedis.resource.use {
+            it.hdel(
+                "Compound::Kits::$kitName::Cooldowns::",
+                uuid.toString()
+            )
+        }
+    }
+
+
     fun addCooldown(kitName: String, uuid: UUID, time: Long)
     {
         RedisManager.jedis.resource.use {
