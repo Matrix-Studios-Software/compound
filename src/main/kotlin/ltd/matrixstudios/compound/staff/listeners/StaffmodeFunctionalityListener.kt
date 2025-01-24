@@ -57,18 +57,14 @@ class StaffmodeFunctionalityListener : Listener {
                 {
                     player.inventory.itemInHand = StaffItems.UNVANISH
 
-                    StaffSuiteVisibilityHandler.onDisableVisbility(player)
-
-                    player.removeMetadata("vanish", CompoundPlugin.instance)
+                    player.performCommand("vanish")
                 }
 
                 if (itemInHand.isSimilar(StaffItems.UNVANISH))
                 {
                     player.inventory.itemInHand = StaffItems.VANISH
 
-                    StaffSuiteVisibilityHandler.onEnableVisibility(player)
-
-                    player.setMetadata("vanish", FixedMetadataValue(CompoundPlugin.instance, true))
+                    player.performCommand("vanish")
                 }
 
                 if (itemInHand.isSimilar(StaffItems.ONLINE_STAFF))
