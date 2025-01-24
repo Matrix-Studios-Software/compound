@@ -12,8 +12,11 @@ repositories {
     mavenCentral()
 
     maven {
-        url 'https://papermc.io/repo/repository/maven-public/'
+        url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
     }
+
+    maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
+    maven { url = 'https://oss.sonatype.org/content/repositories/central' }
 
     maven {
         url 'https://jitpack.io'

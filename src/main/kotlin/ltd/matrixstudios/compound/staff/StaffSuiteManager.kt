@@ -25,8 +25,6 @@ class StaffSuiteManager {
         player.gameMode = GameMode.SURVIVAL
         player.inventory.clear()
 
-        player.spigot().collidesWithEntities = true
-
         if (modInventories.containsKey(player.uniqueId)) {
             val items = modInventories[player.uniqueId]!!
 
@@ -79,9 +77,6 @@ class StaffSuiteManager {
         player.inventory.setItem(6, StaffItems.ONLINE_STAFF)
         player.inventory.setItem(7, StaffItems.VANISH)
         player.inventory.setItem(8, StaffItems.FREEZE)
-
-        //makes it so arrows dont hit you when you are in staff mode
-        player.spigot().collidesWithEntities = false
 
         player.updateInventory()
 

@@ -14,8 +14,8 @@ class PollMenu(val player: Player) : Menu(27, player) {
     override fun getButtons(player: Player): MutableMap<Int, Button> {
         val buttons = hashMapOf<Int, Button>()
 
-        buttons[12] = BooleanButton(true)
-        buttons[14] = BooleanButton(false)
+        buttons[11] = BooleanButton(true)
+        buttons[15] = BooleanButton(false)
 
         val activePoll = PollManager.activePoll
 
@@ -23,11 +23,11 @@ class PollMenu(val player: Player) : Menu(27, player) {
 
             buttons[4] =
                 SimpleActionButton(Material.BEACON,
-                    mutableListOf(Chat.format("&7&m------------------"),
-                        Chat.format("&e${activePoll.optionOne}: &c${PollManager.getVotesForPoll(activePoll.optionOne)}"),
-                        Chat.format("&e${activePoll.optionTwo}: &c${PollManager.getVotesForPoll(activePoll.optionTwo)}"),
-                        Chat.format("&7&m------------------")),
-                Chat.format("&eQuestion: &c${activePoll.whatFor}"),
+                    mutableListOf(Chat.format("&7&m--------------------------"),
+                        Chat.format("&7${activePoll.optionOne}: &f${PollManager.getVotesForPoll(activePoll.optionOne)}"),
+                        Chat.format("&7${activePoll.optionTwo}: &f${PollManager.getVotesForPoll(activePoll.optionTwo)}"),
+                        Chat.format("&7&m--------------------------")),
+                Chat.format("&a&lQuestion: ${activePoll.whatFor}"),
                 0,
                 null)
         }
@@ -63,9 +63,9 @@ class PollMenu(val player: Player) : Menu(27, player) {
             if (poll != null)
             {
                 if (boolean) {
-                    return Chat.format("&a${poll!!.optionOne}")
+                    return Chat.format("&f${poll!!.optionOne}")
                 } else if (!boolean) {
-                    return Chat.format("&c${poll!!.optionTwo}")
+                    return Chat.format("&f${poll!!.optionTwo}")
                 }
             }
 

@@ -38,10 +38,10 @@ kits:
 modules:
   staffSuite: true
   messages: true
-  kits: true
+  kits: false
   gamemode: true
-  reportsAndRequests: true
+  reportsAndRequests: false
   polls: true
   chatManagement: true
-  useRedis: true
+  useRedis: false
 
