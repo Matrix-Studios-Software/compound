@@ -45,11 +45,8 @@ class StaffSuiteManager {
         modInventories.remove(player.uniqueId)
         modArmor.remove(player.uniqueId)
 
-        StaffSuiteVisibilityHandler.onDisableVisbility(player)
-
+        player.performCommand("vanish")
         player.removeMetadata("modmode", CompoundPlugin.instance)
-        player.removeMetadata("vanish", CompoundPlugin.instance)
-
     }
 
     fun setStaffMode(player: Player)
@@ -80,9 +77,7 @@ class StaffSuiteManager {
 
         player.updateInventory()
 
-        StaffSuiteVisibilityHandler.onEnableVisibility(player)
-
         player.setMetadata("modmode", FixedMetadataValue(CompoundPlugin.instance, true))
-        player.setMetadata("vanish", FixedMetadataValue(CompoundPlugin.instance, true))
+        player.performCommand("vanish")
     }
 }
